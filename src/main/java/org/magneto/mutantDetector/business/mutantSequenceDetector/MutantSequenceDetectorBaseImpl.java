@@ -1,7 +1,13 @@
 package org.magneto.mutantDetector.business.mutantSequenceDetector;
 
-public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceDetector {
+import java.util.Arrays;
 
+import lombok.extern.log4j.Log4j;
+
+@Log4j
+public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceDetector {
+	
+	public static char[] VALID_CHARACTERS = {'A', 'T','C','G'};
 	protected int numberOfSequencesToFind;
 	protected int size;
 	protected int sequenceLength;
@@ -36,7 +42,7 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 	/**
 	 * Implementación genérica para evitar buscar resultados fuera los límites
 	 */
-	public boolean isValid(int row, int column) {
+	public boolean isInsideMatrix(int row, int column) {
 		return row < size && column < size && row >= 0;
 	}
 
@@ -57,54 +63,57 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 
 		int row = 0, column = 0;
 		char current;
-		char charForSequence;
+		char charForSequence = ' ';
+		boolean isFirstCharacter = false;
 		/**
-		 * Puedo acotar optimizarlo un poco más 
+		 * TODO: Puedo acotar el valor de R inicial para optimizarlo un poco más 
 		 */
 		for (int r = 0; r < size && found < numberOfSequencesToFind; r++) {
-
-			charForSequence = ' ';
+			
+			isFirstCharacter = true;
 			count = 0;
 			/**
 			 * Recoro la sequencia
 			 */
 
-			// String word = "";
+			 String word = "";
 			for (int offset = 0; offset < size && found < numberOfSequencesToFind; offset++) {
 
 				row = getRow(r, offset);
-
+				
 				column = getColumn(r, offset);
 
 				// valido que la posición sea válida
-				if (!isValid(row, column)) {
+				if (checkIfInvalidPosition(row, column)  && !isValidCharacter(row, column)) {
 					break;
 				} else {
 					// si es una solución válida
 					current = dna[row].charAt(column);
-					if (charForSequence == ' ') {
+					if (isFirstCharacter) {
 						charForSequence = current;
-						// word = "";
+						isFirstCharacter = false;
+						 word = "";
 						// chequear si la siguiente sequencia finaliza en una
 						// columna y fila válida
-						if(checkIfInvalid(r, offset+3))break;
+						if(checkIfInvalidPosition(r, offset+3))break;
 					}
 
 					// Si matchea avanzo en busqueda de la sequencia
 					if (current == charForSequence) {
 
 						count++;
-						// word += charForSequence + "";
+						 word += charForSequence + "";
 						if (count == sequenceLength) {
 
-							// log.info("found " + word + " in " + row+", "
-							// +column);
+							 log.info("found " + word + " in " + row+", "
+							 +column);
 							if (++found >= numberOfSequencesToFind) {
 								break;
 							}
-							charForSequence = ' ';
+							//charForSequence = ' ';
+							isFirstCharacter = true;
 							count = 0;
-							// word="";
+							 word="";
 						}
 
 					} else {
@@ -113,7 +122,7 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 						charForSequence = current;
 						count = 1;
 						
-						if(checkIfInvalid(r, offset+3))break;
+						if(checkIfInvalidPosition(r, offset+3))break;
 						// log.info(word);
 						// word = charForSequence+ "";
 					}
@@ -124,8 +133,19 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 		return found;
 	}
 
-	private boolean checkIfInvalid(int r, int offset) {
-		return !isValid(getRow(r, offset), getColumn(r, offset));
+	private boolean isValidCharacter(int row, int column) {
+		for(char valid : VALID_CHARACTERS) {
+			//Quizás puedo recibir las coordenadas y tener un array de booleans donde me dice si un caracter es valido o no
+			//Especie de CACHE
+			if(dna[row].charAt(column) == valid) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean checkIfInvalidPosition(int r, int offset) {
+		return !isInsideMatrix(getRow(r, offset), getColumn(r, offset));
 	}
 
 }

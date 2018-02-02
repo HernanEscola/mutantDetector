@@ -58,7 +58,7 @@ public class MutantServiceImplTest extends TestWithNewRedisServerInstance {
 		 * cada direccion
 		 */
 
-		int[] minVal = { 2, Integer.MAX_VALUE };
+		int[] minVal = {  Integer.MAX_VALUE };
 
 		int sequenceLength = 4;
 		IMutantSequenceDetector horizontalMsd = new HorizontalMutantSequenceDetectorImpl();
