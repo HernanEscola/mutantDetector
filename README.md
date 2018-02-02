@@ -39,9 +39,6 @@ Antes de empezar es necesario tener instalado:
 
 Una vez que todo esté instalado es momento de preparar la aplicación
 
-```
-Give examples
-```
 
 ## Instalación
 
