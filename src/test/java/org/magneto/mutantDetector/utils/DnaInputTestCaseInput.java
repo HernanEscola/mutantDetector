@@ -2,12 +2,14 @@ package org.magneto.mutantDetector.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.magneto.mutantDetector.services.MutantServiceImpl;
 /**
  * Estructura que contiene un dna input y sus respectivos resultados para luego validar contra el detector de sequencias
  * @author aion
  *
  */
-public class DnaInputTest {
+public class DnaInputTestCaseInput {
 		private String[] dna;
 		private int horizontalSequences;
 		private int verticalSequences;
@@ -16,7 +18,7 @@ public class DnaInputTest {
 		private boolean isMutant;
 		private boolean valid;
 		
-		public DnaInputTest(String[] dna, int horizontalSequences, int verticalSequences, int obliqueSequences, int inverseSequences, boolean isValid) {
+		public DnaInputTestCaseInput(String[] dna, int horizontalSequences, int verticalSequences, int obliqueSequences, int inverseSequences, boolean isValid) {
 			super();
 			this.dna = dna;
 			this.horizontalSequences = horizontalSequences;
@@ -24,7 +26,7 @@ public class DnaInputTest {
 			this.obliqueSequences = obliqueSequences;
 			this.inverseObliqueSequences = inverseSequences;
 			
-			this.isMutant = (this.horizontalSequences + this.verticalSequences + obliqueSequences + inverseSequences) >=2;
+			this.isMutant = (this.horizontalSequences + this.verticalSequences + obliqueSequences + inverseSequences) >= MutantServiceImpl.N_SEQUENCES_TO_FIND;
 		}
 
 		public String[] getDna() {
@@ -66,27 +68,27 @@ public class DnaInputTest {
 		 * 
 		 * @return
 		 */
-		public static List<DnaInputTest> getTestMatrices() {
+		public static List<DnaInputTestCaseInput> getTestMatrices() {
 			
-			 ArrayList<DnaInputTest> dnas = new ArrayList<DnaInputTest>();
+			 ArrayList<DnaInputTestCaseInput> dnas = new ArrayList<DnaInputTestCaseInput>();
 		
 			String[] dna1 = { //
-					"aaaaa", //
-					"addbd", // 1 oblicua
-					"adddd", // 1h
-					"aaddd", //
-					"adddd" };// 1h 1oblique inverse
+					"AAAAA", //
+					"ATTCT", //
+					"ATTTT", // 
+					"AATTT", //
+					"ATTTT" };//
 			// 3 verticals 3 horizontales, 1 oblicuo y 1 oblicuo inverso
-			dnas.add(new DnaInputTest(dna1, 3, 3, 1, 1, true));
+			dnas.add(new DnaInputTestCaseInput(dna1, 3, 3, 1, 1, true));
 		
 			String[] dna2 = { //
-					"accca", //
-					"aaaab", //
-					"acabb", //
-					"aabab", //
-					"bbbbb" };//
+					"ACCCA", //
+					"AAAAT", //
+					"ACATT", //
+					"AATAT", //
+					"TTTTT" };//
 			// 4 verticals 3 horizontales, 1 oblicuo y 1 oblicuo inverso
-			dnas.add(new DnaInputTest(dna2, 2, 2, 1, 2, true));
+			dnas.add(new DnaInputTestCaseInput(dna2, 2, 2, 1, 2, true));
 		
 			String[] dna3 = { //
 					"TAAAAAAA", //
@@ -97,9 +99,9 @@ public class DnaInputTest {
 					"CTCTCGGG", //
 					"CCCCGGGG", //
 					"CCCCATGG" };//
-			dnas.add(new DnaInputTest(dna3, 6, 4, 3, 3, true));
+			dnas.add(new DnaInputTestCaseInput(dna3, 6, 4, 3, 3, true));
 		
-			String[] dna4 = { //
+			String[] dna4 = { // //
 					"TADAPAAC", //
 					"OKMIJNUH", //
 					"BHUNJIMK", //
@@ -107,9 +109,8 @@ public class DnaInputTest {
 					"MKONJIBH", //
 					"CTCTCGGO", //
 					"MKOOKMMK", //
-					"UHBIJNOK" };//
-			// 1 hori, y 1 vert
-			dnas.add(new DnaInputTest(dna4, 0, 1, 0, 0,true));
+					"UHBIJNOK" };// // es inválido si valido que esté contenido en {A,T,C,G} 
+			dnas.add(new DnaInputTestCaseInput(dna4, 0, 1, 0, 0,true));
 		
 			return dnas;
 		}

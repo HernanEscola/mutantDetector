@@ -17,8 +17,7 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @SwaggerDefinition(basePath="api",info = @Info(description = "API para la deteccion de genes Mutantes en humanos", version = "1.0.2", title = "Magneto - Mutant Detector ", contact = @Contact(name = "Hernan Adriel Escola", email = "hernan.a.escola@gmail.com")), consumes = {
-		"application/json" }, produces = { "application/json" }, schemes = { SwaggerDefinition.Scheme.HTTP,
-				SwaggerDefinition.Scheme.HTTPS }, externalDocs = @ExternalDocs(value = "Documentacion completa de la API ", url = "../javadocs/index.html"))
+		"application/json" }, produces = { "application/json" }, schemes = { SwaggerDefinition.Scheme.HTTP}, externalDocs = @ExternalDocs(value = "Documentacion completa de la API ", url = "../javadocs/index.html"))
 @ApplicationPath("api")
 public class RestApplication extends ResourceConfig {
 	public static final String RESOURCE_PACKAGE = "org.magneto.mutantDetector";

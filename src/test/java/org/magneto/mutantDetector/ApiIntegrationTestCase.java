@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.magneto.mutantDetector.DTO.Dna;
 import org.magneto.mutantDetector.DTO.Stats;
 import org.magneto.mutantDetector.business.enums.STATS_KEYS;
-import org.magneto.mutantDetector.utils.DnaInputTest;
+import org.magneto.mutantDetector.utils.DnaInputTestCaseInput;
 import org.magneto.mutantDetector.utils.ServersManager;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
@@ -63,13 +63,13 @@ public class ApiIntegrationTestCase {
 	}
 
 	private void testAllAdnTestCasesSingleMutantApiRequest(final URI baseUrl, Client client, Map<Object, Integer> statsMap) {
-		for (DnaInputTest dnaStruct : DnaInputTest.getTestMatrices()) {
+		for (DnaInputTestCaseInput dnaStruct : DnaInputTestCaseInput.getTestMatrices()) {
 			testSingleMutantApiRequest(baseUrl, client, statsMap, dnaStruct);
 
 		}
 	}
 
-	private void testSingleMutantApiRequest(final URI baseUrl, Client client, Map<Object, Integer> statsMap, DnaInputTest dnaStruct) {
+	private void testSingleMutantApiRequest(final URI baseUrl, Client client, Map<Object, Integer> statsMap, DnaInputTestCaseInput dnaStruct) {
 		Dna dna = new Dna();
 		dna.setDna(dnaStruct.getDna());
 		WebTarget postTarget = client.target(baseUrl).path("/mutant");
@@ -110,7 +110,7 @@ public class ApiIntegrationTestCase {
 	//
 	// log.info("Test Post DNA");
 	//
-	// for (DnaInputTest dnaStruct : DnaInputTest.getTestMatrices()) {
+	// for (DnaInputTestCaseInput dnaStruct : DnaInputTestCaseInput.getTestMatrices()) {
 	//
 	// WebTarget postTarget = client.target(baseUrl).path("/mutant");
 	// Response responseObject =

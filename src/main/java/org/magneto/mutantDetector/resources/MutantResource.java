@@ -26,24 +26,35 @@ public class MutantResource {
 
 	@Inject
 	public MutantServiceImpl mutantService;
-	
-//	@GET
-//	@Produces(MediaType.TEXT_PLAIN)
-//	public Response ping() throws Exception {
-//		return Response.ok("Active").build();
-//	}
-	
+
+	// @GET
+	// @Produces(MediaType.TEXT_PLAIN)
+	// public Response ping() throws Exception {
+	// return Response.ok("Active").build();
+	// }
+
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces(MediaType.TEXT_PLAIN)
-	@ApiOperation(value = "Servicio de Analisis de Cadena de ADN", notes = "Recibe un array de Strings representando de una cadena de ADN cuyo largo de string deben ser igual al tamaño del array, formando una especie de matriz cuadrada de caracteres.\nUn input es considerado mutante si hay al menos dos secuencias de caracteres iguales consecutivos en sentido horizontal, vertical u oblicuo")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Es una cadena de ADN Mutante"), @ApiResponse(code = 403, message = "Es una cadena de ADN Humano") })
+	@ApiOperation(value = "Servicio de Analisis de Cadena de ADN", notes = "Recibe un array de Strings representando de una cadena de ADN cuyo largo de string deben ser igual al tamaño del array, formando una especie de matriz cuadrada de caracteres.\nUn input es considerado mutante si hay al menos dos secuencias de caracteres iguales consecutivos en sentido horizontal, vertical u oblicuo. "
+			+ "Ejemplo mutante: en /json/adn_mutante_example.json  , Ejemplo humano: /json/adn_humano_example.json")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Es una cadena de ADN Mutante"),
+			@ApiResponse(code = 403, message = "Es una cadena de ADN Humano") })
+	/**
+	 * ejemplo mutante {
+	 * "dna":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"] }
+	 * 
+	 * 
+	 * @param dna
+	 * @return
+	 * @throws Exception
+	 */
 	public Response isMutant(Dna dna) throws Exception {
 		log.debug("Analizing DNA");
-		if (mutantService.analizeDna(dna)) { 
+		if (mutantService.analizeDna(dna)) {
 			return Response.ok("ADN Mutante").build();
 		} else {
-			return Response.status(Status.FORBIDDEN).entity("ADN Humado").build();
+			return Response.status(Status.FORBIDDEN).entity("ADN Humano").build();
 		}
 
 	}

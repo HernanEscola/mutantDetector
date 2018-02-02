@@ -46,10 +46,10 @@ public class StatsDaoTest extends TestWithNewRedisServerInstance {
 		}
 		try {
 			ServersManager.stopRedisCurrentInstance();
-			statsDao.addHuman(); // Arroja excepci'on al no tener el server
+			statsDao.addHuman(); // Arroja excepción al no tener el server
 			Assertions.fail("Se Esperaba una excepción");
 		} catch (Exception e) {
-			// TODO: hay que validar si es la excepci'on que esperaba
+			// TODO: hay que validar si es la excepción que esperaba
 			assertEquals(DBException.class, e.getClass(), "Incorrecto tipo de Excepción");
 		} finally {
 			try {
@@ -78,10 +78,10 @@ public class StatsDaoTest extends TestWithNewRedisServerInstance {
 		// test Excepttion
 		try {
 			ServersManager.stopRedisCurrentInstance();
-			statsDao.addMutant(); // Arroja excepci'on al no tener el server
+			statsDao.addMutant(); // Arroja excepción al no tener el server
 			fail("Se esperaba una DaoException pero no se arrojó");
 		} catch (Exception e) {
-			// TODO: hay que validar si es la excepci'on que esperaba
+			// TODO: hay que validar si es la excepción que esperaba
 			assertEquals(DBException.class, e.getClass(), "Incorrecto tipo de Excepción");
 		} finally {
 			try {

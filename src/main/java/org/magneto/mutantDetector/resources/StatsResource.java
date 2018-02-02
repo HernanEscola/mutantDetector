@@ -13,7 +13,7 @@ import org.magneto.mutantDetector.services.StatsServiceImpl;
 import io.swagger.annotations.Api;
 import lombok.extern.log4j.Log4j;
 
-@Api(value = "Stats Service", description = "API De consulta de Stats sobre los anala'isis realizado")
+@Api(value = "Stats Service", description = "API De consulta de Stats sobre los analaísis realizado")
 @Path("/stats")
 @Log4j
 public class StatsResource {

@@ -7,7 +7,7 @@ import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.ObliqueMu
 import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.VerticalMutantSequenceDetectorImpl;
 
 /**
- * Clase que, compuesta de las otros detectores, ejecuta el algoritmo para hallar una secuencia v'alida
+ * Clase que, compuesta de las otros detectores, ejecuta el algoritmo para hallar una secuencia válida
  * Asegurarse de Inicializar la instancia antes de llamar a detect
  * @author Hernan A. Escola
  *

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.magneto.mutantDetector.database.MutantDao;
 import org.magneto.mutantDetector.exceptions.DBException;
-import org.magneto.mutantDetector.utils.DnaInputTest;
+import org.magneto.mutantDetector.utils.DnaInputTestCaseInput;
 import org.magneto.mutantDetector.utils.TestWithNewRedisServerInstance;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class MutantDaoTest extends TestWithNewRedisServerInstance {
 
 	@Test
 	public void saveMutantDnaTest() {
-		DnaInputTest it = DnaInputTest.getTestMatrices().get(0);
+		DnaInputTestCaseInput it = DnaInputTestCaseInput.getTestMatrices().get(0);
 		MutantDao mutantDao;
 		mutantDao = new MutantDao();
 		try {

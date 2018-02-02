@@ -17,7 +17,7 @@ public interface IMutantSequenceDetector {
 	
 	/**
 	 * Inicializa el detector para poder ajustarse a los parámetros
-	 * @param sequenceLength
+	 * @param SEQUENCE_LENGTH
 	 * @param numberOfSequencesToFind
 	 */
 	public IMutantSequenceDetector init(int sequenceLength, int numberOfSequencesToFind);

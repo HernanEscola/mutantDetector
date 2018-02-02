@@ -17,8 +17,8 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class MutantServiceImpl implements MutantService {
 
-	final private int sequenceLength = 4;
-	final private int sequencesToFind = 2;
+	final public static int SEQUENCE_LENGTH = 4;
+	final public static int N_SEQUENCES_TO_FIND = 2;
 
 	@Inject
 	private MutantDao dnaDao;
@@ -75,8 +75,8 @@ public class MutantServiceImpl implements MutantService {
 	protected boolean isMutant(Dna dnaData) {
 		String[] dna = dnaData.getDna();
 
-		int found = mutantSequenceDetector.init(sequenceLength, sequencesToFind).detect(dna);
-		return found == sequencesToFind;
+		int found = mutantSequenceDetector.init(SEQUENCE_LENGTH, N_SEQUENCES_TO_FIND).detect(dna);
+		return found == N_SEQUENCES_TO_FIND;
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class MutantServiceImpl implements MutantService {
 	 * analizados
 	 * 
 	 * @param dna
-	 *            Srtring[] Cadena de ADN asumible v'alida y mutante
+	 *            Srtring[] Cadena de ADN asumible válida y mutante
 	 * 
 	 * @throws DBException
 	 */

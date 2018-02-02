@@ -21,7 +21,7 @@ import org.magneto.mutantDetector.exceptions.DBException;
 import org.magneto.mutantDetector.exceptions.InvalidDnaException;
 import org.magneto.mutantDetector.services.MutantServiceImpl;
 import org.magneto.mutantDetector.services.StatsServiceImpl;
-import org.magneto.mutantDetector.utils.DnaInputTest;
+import org.magneto.mutantDetector.utils.DnaInputTestCaseInput;
 import org.magneto.mutantDetector.utils.TestWithNewRedisServerInstance;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @TestInstance(Lifecycle.PER_CLASS)
 public class MutantServiceImplTest extends TestWithNewRedisServerInstance {
 
-	List<DnaInputTest> dnaTestCases;
+	List<DnaInputTestCaseInput> dnaTestCases;
 
 	@BeforeAll
 	public void setup() {
@@ -49,7 +49,7 @@ public class MutantServiceImplTest extends TestWithNewRedisServerInstance {
 	 */
 	@Test
 	public void checkMutantSequenceDetectorTest() throws Exception {
-		List<DnaInputTest> dnas = DnaInputTest.getTestMatrices();
+		List<DnaInputTestCaseInput> dnas = DnaInputTestCaseInput.getTestMatrices();
 
 		/**
 		 * hago dos iteraciones, una con el limite minimo para que sea mutante para ver
@@ -64,7 +64,7 @@ public class MutantServiceImplTest extends TestWithNewRedisServerInstance {
 		IMutantSequenceDetector verticalMsd = new VerticalMutantSequenceDetectorImpl();
 		IMutantSequenceDetector inverseObliquelMsd = new InverseObliqueMutantSequenceDetectorImpl();
 		IMutantSequenceDetector obliquelMsd = new ObliqueMutantSequenceDetectorImpl();
-		for (DnaInputTest dnaStruct : dnas) {
+		for (DnaInputTestCaseInput dnaStruct : dnas) {
 			String[] dna = dnaStruct.getDna();
 			for (int sequencesToFind : minVal) {
 				horizontalMsd.init(sequenceLength, sequencesToFind);
@@ -86,9 +86,9 @@ public class MutantServiceImplTest extends TestWithNewRedisServerInstance {
 	@Test
 	public void testIsMutant() {
 
-		List<DnaInputTest> dnas = DnaInputTest.getTestMatrices();
+		List<DnaInputTestCaseInput> dnas = DnaInputTestCaseInput.getTestMatrices();
 
-		for (DnaInputTest dnaStruct : dnas) {
+		for (DnaInputTestCaseInput dnaStruct : dnas) {
 			Dna dna = new Dna();
 			dna.setDna(dnaStruct.getDna());
 			Assert.assertEquals(dnaStruct.isMutant(), createMuntantService().isMutant(dna));
@@ -98,9 +98,9 @@ public class MutantServiceImplTest extends TestWithNewRedisServerInstance {
 	@Test
 	public void analizeDnaTest() {
 
-		List<DnaInputTest> dnas = DnaInputTest.getTestMatrices();
+		List<DnaInputTestCaseInput> dnas = DnaInputTestCaseInput.getTestMatrices();
 		
-		for (DnaInputTest dnaStruct : dnas) {
+		for (DnaInputTestCaseInput dnaStruct : dnas) {
 			Dna dna = new Dna();
 			dna.setDna(dnaStruct.getDna());
 			try {

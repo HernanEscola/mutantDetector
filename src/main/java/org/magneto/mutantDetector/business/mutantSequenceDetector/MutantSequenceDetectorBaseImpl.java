@@ -59,7 +59,7 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 		char current;
 		char charForSequence;
 		/**
-		 * Puedo acotar optimizarlo un poco m'as 
+		 * Puedo acotar optimizarlo un poco más 
 		 */
 		for (int r = 0; r < size && found < numberOfSequencesToFind; r++) {
 

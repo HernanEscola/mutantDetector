@@ -5,12 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description="Contenedor de la Cadena de ADN")
 public class Dna {
-	@ApiModelProperty(example= "["+// 
-			"'aaaaa',"+ //
-			"'addbd',"+ // 1 oblicua
-			"'adddd',"+ // 1h
-			"'aaddd',"+ //
-			"'adddd' ]" , allowableValues="A,B,C,D") 
 	private String[] dna;
 
 	public Dna() {
