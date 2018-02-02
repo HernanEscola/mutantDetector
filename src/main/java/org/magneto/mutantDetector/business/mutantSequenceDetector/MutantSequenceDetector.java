@@ -14,7 +14,6 @@ import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.VerticalM
  */
 public class MutantSequenceDetector extends MultiMutantSequenceDetectorImpl{
 	public MutantSequenceDetector(int sequenceLength, int numberOfSequencesToFind) {
-		this();
 		init(sequenceLength, numberOfSequencesToFind);
 	}
 

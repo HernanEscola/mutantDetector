@@ -2,7 +2,6 @@
 package org.magneto.mutantDetector.business.mutantSequenceDetector.impl;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.magneto.mutantDetector.business.mutantSequenceDetector.IMutantSequenceDetector;
@@ -19,8 +18,7 @@ public abstract class MultiMutantSequenceDetectorImpl implements IMutantSequence
 	private int numberOfSequencesToFind;
 	private int sequenceLength;
 	protected List<IMutantSequenceDetector> detectors = new ArrayList<IMutantSequenceDetector>();
-
-
+	
 	public MultiMutantSequenceDetectorImpl() {
 	}
 
@@ -46,6 +44,23 @@ public abstract class MultiMutantSequenceDetectorImpl implements IMutantSequence
 		}
 		return found;
 	}
+
+//	private String[] filter(String[] dna) {
+//		
+//		int size = dna.length;
+//		String[] filteredDna = new String[size];
+//		
+//		for(int i=0; i < size; i++){
+//			for(int j=0; j < size; j++){
+//				String.toCharArray
+//			char cur = = filteredDna[i].charAt(j);
+//			if()
+//			new StringBuilder().append(str)
+//			}
+//		}
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	@Override
 	public IMutantSequenceDetector init(int sequenceLength, int numberOfSequencesToFind) {

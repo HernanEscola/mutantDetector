@@ -90,28 +90,28 @@ public class DnaInputTestCaseInput {
 //			// 4 verticals 3 horizontales, 1 oblicuo y 1 oblicuo inverso
 //			dnas.add(new DnaInputTestCaseInput(dna2, 2, 2, 1, 2, true));
 //		
-//			String[] dna3 = { //
-//					"TAAAAAAA", //
-//					"ATGGGGAT", //
-//					"TTTTTAAC", //
-//					"CTATAAAG", //
-//					"CTTCGTAG", //
-//					"CTCTCGGG", //
-//					"CCCCGGGG", //
-//					"CCCCATGG" };//
-//			dnas.add(new DnaInputTestCaseInput(dna3, 6, 4, 3, 3, true));
+			String[] dna3 = { //
+					"TAAAAAAA", //
+					"ATGGGGAT", //
+					"TTTTTAAC", //
+					"CTATAAAG", //
+					"CTTCGTAG", //
+					"CTCTCGGG", //
+					"CCCCGGGG", //
+					"CCCCATGG" };//
+			dnas.add(new DnaInputTestCaseInput(dna3, 6, 4, 3, 3, true));
 		
-			String[] dna4 = { // //
-					"TADAPAAC", //
-					"OKMITNUH", //
-					"BHUNTIMK", //
-					"OKMITNUB", //
-					"MKONTIBH", //
-					"CTCTCGGO", //
-					"MKOMMMMK", //
-					"UHBIJNOK" };// // es inválido si valido que esté contenido en {A,T,C,G} 
-			// solo contiene una columna de Ts, porl o tanto las otras sequencias que enceuntre no debería validarlo como mutante
-			dnas.add(new DnaInputTestCaseInput(dna4, 0, 1, 0, 0,true));
+//			String[] dna4 = { // //
+//					"TADAPAAC", //
+//					"OKMITNUH", //
+//					"BHUNTIMK", //
+//					"OKMITNUB", //
+//					"MKONTIBH", //
+//					"CTCTCGGO", //
+//					"MKOMMMMK", //
+//					"UHBIJNOK" };// // es inválido si valido que esté contenido en {A,T,C,G} 
+//			// solo contiene una columna de Ts, porl o tanto las otras sequencias que enceuntre no debería validarlo como mutante
+//			dnas.add(new DnaInputTestCaseInput(dna4, 0, 1, 0, 0,false));
 		
 			return dnas;
 		}
