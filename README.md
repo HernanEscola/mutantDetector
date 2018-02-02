@@ -1,6 +1,17 @@
 # mutantDetector
 Restful API que identifica, dada una cadena de ADN, si esta es mutante o humana
 
+# Problema
+
+Dado un array de Strings que representan cada fila de una tabla de (NxN) con la secuencia del ADN. Las letras de los Strings solo pueden ser: (A,T,C,G)
+ 
+Se considera mutante si encuentras ​más de una secuencia de cuatro letras iguales​, de forma oblicua, horizontal o vertical. 
+ Ejemplo (Caso mutante): 
+ 
+```
+String[] dna = {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"}; 
+```
+
 ## Tecnologías
 
 Java 8
@@ -15,6 +26,8 @@ Jedis - Cliente Redis
 Redis - Base de Datos
 Tomcat 8 - WebServer
 Amazon EC2 y ElasticCache - Alojamiento de la API
+IDE - Eclipse
+
 
 #Demo de la API
 

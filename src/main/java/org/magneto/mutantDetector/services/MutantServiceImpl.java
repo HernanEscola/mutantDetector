@@ -51,14 +51,16 @@ public class MutantServiceImpl implements MutantService {
 	@Override
 	public boolean analizeDna(Dna dnaData) throws InvalidDnaException, DBException {
 
+//		
 //		if (!isValidDna(dnaData)) {
 //			throw new InvalidDnaException();
 //		}
-
-		boolean isMutant = isMutant(dnaData);
+		
+		String[] dna = dnaData.getDna();
+		boolean isMutant = isMutant(dna);
 
 		if (isMutant) {
-			registerMutantDna(dnaData.getDna());
+			registerMutantDna(dna);
 		} else {
 			registerHuman();
 		}
@@ -67,14 +69,12 @@ public class MutantServiceImpl implements MutantService {
 	}
 
 	/**
-	 * Ejecuta el código que analiza si hay alguna sequencia mutante
+	 * Ejecuta el código que analiza si es mutante o no
 	 * 
 	 * @param dnaData
 	 * @return
 	 */
-	protected boolean isMutant(Dna dnaData) {
-		String[] dna = dnaData.getDna();
-
+	public boolean isMutant(String[] dna) {
 		int found = mutantSequenceDetector.init(SEQUENCE_LENGTH, N_SEQUENCES_TO_FIND).detect(dna);
 		return found == N_SEQUENCES_TO_FIND;
 	}
