@@ -54,8 +54,8 @@ public class StatsDao extends JedisDao {
 			jedis = JedisProducer.getInstance().get();
 			Integer mutants = new Integer(Optional.fromNullable(jedis.get(getKey(EDnaType.MUTANT.name()))).or("0"));
 			Integer humans = new Integer(Optional.fromNullable(jedis.get(getKey(EDnaType.HUMAN.name()))).or("0"));
-
-			return new Stats(mutants, humans, (float) humans / ((float) mutants == 0 ? 1 : mutants));
+			
+			return new Stats(mutants, humans, (float) mutants / ((float) humans == 0 ? 1 : humans));
 		} finally {
 			returnToPool(jedis);
 		}

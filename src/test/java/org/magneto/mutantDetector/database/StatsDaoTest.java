@@ -117,7 +117,7 @@ public class StatsDaoTest extends TestWithNewRedisServerInstance {
 
 	private Stats assertStats(Long mutants, Long humans) throws DBException {
 		Stats stats = statsDao.getStats();
-		Float ratio = (float) humans / ((float) mutants == 0 ? 1 : mutants);
+		Float ratio = (float) mutants / ((float) humans == 0 ? 1 : humans);
 		assertEquals(stats.getCount_human_dna(), Integer.valueOf(humans.intValue()), () -> "Humans Stat");
 		assertEquals(stats.getCount_mutant_dna(), Integer.valueOf(mutants.intValue()), () -> "Mutants Stat ");
 		assertEquals(stats.getRatio(), ratio, () -> "Ratio Stat Humans/Mutant");

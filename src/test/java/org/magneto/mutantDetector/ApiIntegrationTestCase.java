@@ -154,7 +154,7 @@ public class ApiIntegrationTestCase {
 		Integer humansCount = statsMap.get(STATS_KEYS.HUMANS);
 		Integer mutantsCount = statsMap.get(STATS_KEYS.MUTATNS);
 
-		Stats expectedStats = new Stats(mutantsCount, humansCount, (float) humansCount / (float) mutantsCount);
+		Stats expectedStats = new Stats(mutantsCount, humansCount, (float) mutantsCount / (float) humansCount);
 		Assertions.assertEquals(expectedStats.getCount_human_dna(), stats.getCount_human_dna(), "Humans Stat");
 		Assertions.assertEquals(expectedStats.getCount_mutant_dna(), stats.getCount_mutant_dna(), "Mutants Stat");
 		Assertions.assertEquals(expectedStats.getRatio(), stats.getRatio(), "Ratio Stat");
