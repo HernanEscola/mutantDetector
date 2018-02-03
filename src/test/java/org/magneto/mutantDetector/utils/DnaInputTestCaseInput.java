@@ -72,24 +72,24 @@ public class DnaInputTestCaseInput {
 			
 			 ArrayList<DnaInputTestCaseInput> dnas = new ArrayList<DnaInputTestCaseInput>();
 		
-			String[] dna1 = { //
-					"AAAAA", //
-					"ATTCT", //
-					"ATTTT", // 
-					"AATTT", //
-					"ATTTT" };//
-			// 3 verticals 3 horizontales, 1 oblicuo y 1 oblicuo inverso
-			dnas.add(new DnaInputTestCaseInput(dna1, 3, 3, 1, 1, true));
-		
-			String[] dna2 = { //
-					"ACCCA", //
-					"AAAAT", //
-					"ACATT", //
-					"AATAT", //
-					"TTTTT" };//
-			// 4 verticals 3 horizontales, 1 oblicuo y 1 oblicuo inverso
-			dnas.add(new DnaInputTestCaseInput(dna2, 2, 2, 1, 2, true));
-		
+//			String[] dna1 = { //
+//					"AAAAA", //
+//					"ATTCT", //
+//					"ATTTT", // 
+//					"AATTT", //
+//					"ATTTT" };//
+//			// 3 verticals 3 horizontales, 1 oblicuo y 1 oblicuo inverso
+//			dnas.add(new DnaInputTestCaseInput(dna1, 3, 3, 1, 1, true));
+//		
+//			String[] dna2 = { //
+//					"ACCCA", //
+//					"AAAAT", //
+//					"ACATT", //
+//					"AATAT", //
+//					"TTTTT" };//
+//			// 4 verticals 3 horizontales, 1 oblicuo y 1 oblicuo inverso
+//			dnas.add(new DnaInputTestCaseInput(dna2, 2, 2, 1, 2, true));
+//		
 			String[] dna3 = { //
 					"TAAAAAAA", //
 					"ATGGGGAT", //
@@ -101,16 +101,17 @@ public class DnaInputTestCaseInput {
 					"CCCCATGG" };//
 			dnas.add(new DnaInputTestCaseInput(dna3, 6, 4, 3, 3, true));
 		
-			String[] dna4 = { // //
-					"TADAPAAC", //
-					"OKMIJNUH", //
-					"BHUNJIMK", //
-					"OKMIJNUB", //
-					"MKONJIBH", //
-					"CTCTCGGO", //
-					"MKOOKMMK", //
-					"UHBIJNOK" };// // es inválido si valido que esté contenido en {A,T,C,G} 
-			dnas.add(new DnaInputTestCaseInput(dna4, 0, 1, 0, 0,true));
+//			String[] dna4 = { // //
+//					"TADAPAAC", //
+//					"OKMITNUH", //
+//					"BHUNTIMK", //
+//					"OKMITNUB", //
+//					"MKONTIBH", //
+//					"CTCTCGGO", //
+//					"MKOMMMMK", //
+//					"UHBIJNOK" };// // es inválido si valido que esté contenido en {A,T,C,G} 
+//			// solo contiene una columna de Ts, porl o tanto las otras sequencias que enceuntre no debería validarlo como mutante
+//			dnas.add(new DnaInputTestCaseInput(dna4, 0, 1, 0, 0,false));
 		
 			return dnas;
 		}

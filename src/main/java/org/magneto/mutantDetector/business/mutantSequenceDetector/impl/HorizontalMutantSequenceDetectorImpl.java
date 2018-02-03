@@ -24,8 +24,8 @@ public class HorizontalMutantSequenceDetectorImpl extends MutantSequenceDetector
 	/**
 	 * Implementación genérica para evitar buscar resultados fuera los límites
 	 */
-	public boolean isValid(int row, int column) {
-		return row < size ;
+	public boolean isInsideMatrix(int row, int column) {
+		return row < size && column < size;
 	}
 
 

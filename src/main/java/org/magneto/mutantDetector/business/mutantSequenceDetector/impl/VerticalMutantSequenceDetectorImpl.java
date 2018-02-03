@@ -17,7 +17,7 @@ public class VerticalMutantSequenceDetectorImpl extends MutantSequenceDetectorBa
 		return r;
 	}
 
-	public boolean isValid(int row, int column) {
+	public boolean isInsideMatrix(int row, int column) {
 		return row < size && column < size;
 	}
 
