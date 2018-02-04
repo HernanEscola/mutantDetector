@@ -21,7 +21,7 @@ public class MutantSequenceDetector extends MultiMutantSequenceDetectorImpl {
 
 	// Mapa para
 	public static char[] VALID_CHARACTERS = { 'A', 'T', 'C', 'G' };
-	public static char INVALID_PLACEHOLDER = ' ';
+	public static char PLACEHOLDER_FOR_INVALID_CHARACTER = ' ';
 	protected final static Set<Character> VALID_CHARACTERS_MAP = new HashSet<Character>(VALID_CHARACTERS.length);
 	{
 		for (char c : VALID_CHARACTERS) {
@@ -48,21 +48,22 @@ public class MutantSequenceDetector extends MultiMutantSequenceDetectorImpl {
 	}
 
 	public String[] filter(String[] dna) {
+
 		int size = dna.length;
 		char current;
 		String[] filtered = new String[dna.length];
-		
-		for(int i = 0; i< size; i++) {
+
+		for (int i = 0; i < size; i++) {
 			StringBuilder row = new StringBuilder(size);
-			
-			for(int j=0; j< size; j++) {
-				//reemplazo todo lo que no sea valido
-				current = isValidChar(dna[i].charAt(j)) ? dna[i].charAt(j): INVALID_PLACEHOLDER ;
+
+			for (int j = 0; j < size; j++) {
+				// reemplazo todo lo que no sea valido
+				current = isValidChar(dna[i].charAt(j)) ? dna[i].charAt(j) : PLACEHOLDER_FOR_INVALID_CHARACTER;
 				row.append(current);
 			}
 			filtered[i] = row.toString();
 		}
-				
+
 		return filtered;
 	}
 
@@ -70,7 +71,5 @@ public class MutantSequenceDetector extends MultiMutantSequenceDetectorImpl {
 		// TODO Auto-generated method stub
 		return VALID_CHARACTERS_MAP.contains(charAt);
 	}
-	
-	
 
 }

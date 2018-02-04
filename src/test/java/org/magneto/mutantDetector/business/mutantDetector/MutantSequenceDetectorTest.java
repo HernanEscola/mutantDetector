@@ -3,7 +3,7 @@ package org.magneto.mutantDetector.business.mutantDetector;
 
 import java.util.List;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneto.mutantDetector.business.mutantSequenceDetector.IMutantSequenceDetector;
 import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantSequenceDetector;
@@ -29,21 +29,18 @@ public class MutantSequenceDetectorTest {
 	 * 
 	 * @throws Exception
 	 */
-	@org.junit.Test
+	@Test
 	public void checkMutantSequenceDetectorTest() throws Exception {
 
 		try {
 			List<DnaInputTestCaseInput> dnas = DnaInputTestCaseInput.getTestMatrices();
-			
-			
 
 			/**
-			 * hago dos iteraciones, una con el limite minimo para que sea
-			 * mutante para ver si el las funciones cortan al encontrarlo, y la
-			 * segunda iteracion es para ver si encuentra todas las variantes
-			 * posible para cada direccion
+			 * hago dos iteraciones, una con el limite minimo para que sea mutante para ver
+			 * si el las funciones cortan al encontrarlo, y la segunda iteracion es para ver
+			 * si encuentra todas las variantes posible para cada direccion
 			 */
-
+			
 			int[] minVal = { 2, Integer.MAX_VALUE };
 
 			int sequenceLength = 4;
@@ -57,24 +54,25 @@ public class MutantSequenceDetectorTest {
 				dna = filter.filter(dna);
 				for (int sequencesToFind : minVal) {
 					horizontalMsd.init(sequenceLength, sequencesToFind);
-					Assert.assertEquals("Cantidad de secuencias Horitonzales Detector", Math.min(sequencesToFind, dnaStruct.getHorizontalSequences()), horizontalMsd.detect(dna));
+					Assertions.assertEquals(Math.min(sequencesToFind, dnaStruct.getHorizontalSequences()), horizontalMsd.detect(dna),
+							"Cantidad de secuencias Horitonzales Detector");
 					verticalMsd.init(sequenceLength, sequencesToFind);
 
-					Assert.assertEquals("Cantidad de secuencias Verticales Detector", Math.min(sequencesToFind, dnaStruct.getVerticalSequences()), verticalMsd.detect(dna));
+					Assertions.assertEquals(Math.min(sequencesToFind, dnaStruct.getVerticalSequences()), verticalMsd.detect(dna), "Cantidad de secuencias Verticales Detector");
 
 					inverseObliquelMsd.init(sequenceLength, sequencesToFind);
-					Assert.assertEquals("Cantidad de secuencias Oblicuas Inversas", Math.min(sequencesToFind, dnaStruct.getInverseObliqueSequences()),
-							inverseObliquelMsd.detect(dna));
+					Assertions.assertEquals(Math.min(sequencesToFind, dnaStruct.getInverseObliqueSequences()), inverseObliquelMsd.detect(dna),
+							"Cantidad de secuencias Oblicuas Inversas");
 
 					obliquelMsd.init(sequenceLength, sequencesToFind);
-					Assert.assertEquals("Cantidad de secuencias Oblicuas", Math.min(sequencesToFind, dnaStruct.getObliqueSequences()), obliquelMsd.detect(dna));
+					Assertions.assertEquals(Math.min(sequencesToFind, dnaStruct.getObliqueSequences()), obliquelMsd.detect(dna), "Cantidad de secuencias Oblicuas");
 
 				}
 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			Assertions.fail(e);
 		}
 	}
 

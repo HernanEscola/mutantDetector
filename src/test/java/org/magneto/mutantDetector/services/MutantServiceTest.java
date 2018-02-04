@@ -10,10 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.magneto.mutantDetector.DTO.Dna;
+import org.magneto.mutantDetector.business.enums.EDnaType;
 import org.magneto.mutantDetector.database.MutantDao;
 import org.magneto.mutantDetector.database.StatsDao;
 import org.magneto.mutantDetector.exceptions.DBException;
-import org.magneto.mutantDetector.exceptions.InvalidDnaException;
+import org.magneto.mutantDetector.services.interfaces.MutantService;
 import org.magneto.mutantDetector.utils.DnaInputTestCaseInput;
 import org.magneto.mutantDetector.utils.TestWithNewRedisServerInstance;
 
@@ -21,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @TestInstance(Lifecycle.PER_CLASS)
-public class MutantServiceImplTest extends TestWithNewRedisServerInstance {
+public class MutantServiceTest extends TestWithNewRedisServerInstance {
 
 	List<DnaInputTestCaseInput> dnaTestCases;
 
@@ -35,41 +36,52 @@ public class MutantServiceImplTest extends TestWithNewRedisServerInstance {
 		super.finish();
 	}
 
-
 	@Test
 	public void testIsMutant() {
 
 		List<DnaInputTestCaseInput> dnas = DnaInputTestCaseInput.getTestMatrices();
 
 		for (DnaInputTestCaseInput dnaStruct : dnas) {
-			Dna dna = new Dna();
-			Assert.assertEquals(dnaStruct.isMutant(), createMuntantService().isMutant(dnaStruct.getDna()));
+			Assert.assertEquals(dnaStruct.isMutant(), instantiateMuntantService().isMutant(dnaStruct.getDna()));
 		}
 	}
 
 	@Test
+	public void isMutantSpeedTest() {
+
+		String[] dna = DnaInputTestCaseInput.getHumanDNA().getDna();
+		MutantService service = instantiateMuntantService();
+		Long start = System.currentTimeMillis();
+		int iterations = 1000000;
+		for (int i = 0; i < iterations; i++) {
+			service.isMutant(dna);
+		}
+
+		Long finish = System.currentTimeMillis();
+		log.info("Finish Speed test in" + (finish - start) + "ms");
+	}
+
+	@Test
+	/**
+	 * TODO: Agregar Mock para solamente testear analizeDNA
+	 */
 	public void analizeDnaTest() {
 
 		List<DnaInputTestCaseInput> dnas = DnaInputTestCaseInput.getTestMatrices();
-
+		MutantService service = instantiateMuntantService();
 		for (DnaInputTestCaseInput dnaStruct : dnas) {
 			Dna dna = new Dna();
 			dna.setDna(dnaStruct.getDna());
 			try {
-				MutantServiceImpl service = createMuntantService();
 
-				Assertions.assertEquals(dnaStruct.isMutant(), service.analizeDna(dna));
-			} catch (InvalidDnaException e) {
-				Assertions.assertFalse(dnaStruct.isValid());
+				Assertions.assertEquals((dnaStruct.isMutant() ? EDnaType.MUTANT : EDnaType.HUMAN), service.analizeDna(dna));
 			} catch (DBException e) {
 				Assertions.fail(e);
 			}
 		}
 	}
-	
-	
 
-	private MutantServiceImpl createMuntantService() {
+	private MutantService instantiateMuntantService() {
 
 		return new MutantServiceImpl(new MutantDao(), new StatsServiceImpl(new StatsDao()));
 	}

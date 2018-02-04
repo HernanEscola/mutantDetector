@@ -46,13 +46,8 @@ public class JedisProducer {
 		String redisHost = null, redisPort = null;
 		Jedis jResource = null;
 
-		for (String key : System.getenv().keySet()) {
-			log.info(key + "=" + System.getenv().get(key));
-		}
-
-		log.info("Redis=" + System.getenv().get("REDIS_HOST"));
-		// redisHost = System.getenv().getOrDefault("REDIS_HOST", host);
-
+		log.info("Env var REDIS_HOST=" + System.getenv().get("REDIS_HOST"));
+		// redisHost = System.getenv().getOrDefault("REDIS_HOST",
 		for (String host : redisHosts) { // esto
 			try {
 

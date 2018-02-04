@@ -9,7 +9,6 @@ import org.magneto.mutantDetector.business.mutantSequenceDetector.IMutantSequenc
 import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantSequenceDetector;
 import org.magneto.mutantDetector.database.MutantDao;
 import org.magneto.mutantDetector.exceptions.DBException;
-import org.magneto.mutantDetector.exceptions.InvalidDnaException;
 import org.magneto.mutantDetector.services.interfaces.MutantService;
 
 import lombok.extern.log4j.Log4j;
@@ -50,18 +49,17 @@ public class MutantServiceImpl implements MutantService {
 	 *             Arrojada si ocurre alg'un error al querer registrar la cadena
 	 */
 	@Override
-	public EDnaType analizeDna(Dna dnaData) throws InvalidDnaException, DBException {
-
+	public EDnaType analizeDna(Dna dnaData) throws DBException {
 
 		String[] dna = dnaData.getDna();
 		boolean isMutant = isMutant(dna);
-		
+
 		EDnaType type = null;
 		if (isMutant) {
-			type = EDnaType.HUMAN;
+			type = EDnaType.MUTANT;
 			registerMutantDna(dna);
 		} else {
-			type = EDnaType.MUTANT;
+			type = EDnaType.HUMAN;
 			registerHuman();
 		}
 
