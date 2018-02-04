@@ -35,8 +35,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 public class ApiIntegrationTestCase {
 
-
-
 	@Test
 	public void integrationTest() throws Exception {
 		try {
@@ -73,8 +71,7 @@ public class ApiIntegrationTestCase {
 		Dna dna = new Dna();
 		dna.setDna(dnaStruct.getDna());
 		WebTarget postTarget = client.target(baseUrl).path("/mutant");
-		Response responseObject = postTarget.request(MediaType.TEXT_PLAIN_TYPE).post(Entity.entity(dna, MediaType.APPLICATION_JSON_TYPE),
-				Response.class);
+		Response responseObject = postTarget.request(MediaType.TEXT_PLAIN_TYPE).post(Entity.entity(dna, MediaType.APPLICATION_JSON_TYPE), Response.class);
 
 		log.info(responseObject.toString());
 		if (dnaStruct.isMutant()) {
@@ -85,8 +82,7 @@ public class ApiIntegrationTestCase {
 			Assertions.assertEquals(Status.FORBIDDEN.getStatusCode(), responseObject.getStatus());
 		}
 	}
-	
-	
+
 	//
 	// public void otro() throws Exception {
 	// for (int i = 0; i < 5; i++) {
@@ -110,7 +106,8 @@ public class ApiIntegrationTestCase {
 	//
 	// log.info("Test Post DNA");
 	//
-	// for (DnaInputTestCaseInput dnaStruct : DnaInputTestCaseInput.getTestMatrices()) {
+	// for (DnaInputTestCaseInput dnaStruct :
+	// DnaInputTestCaseInput.getTestMatrices()) {
 	//
 	// WebTarget postTarget = client.target(baseUrl).path("/mutant");
 	// Response responseObject =
@@ -154,10 +151,16 @@ public class ApiIntegrationTestCase {
 		Integer humansCount = statsMap.get(STATS_KEYS.HUMANS);
 		Integer mutantsCount = statsMap.get(STATS_KEYS.MUTATNS);
 
-		Stats expectedStats = new Stats(mutantsCount, humansCount, (float) mutantsCount / (float) humansCount);
+		Stats expectedStats = new Stats(mutantsCount, humansCount, calculateRatio(humansCount, mutantsCount));
 		Assertions.assertEquals(expectedStats.getCount_human_dna(), stats.getCount_human_dna(), "Humans Stat");
 		Assertions.assertEquals(expectedStats.getCount_mutant_dna(), stats.getCount_mutant_dna(), "Mutants Stat");
 		Assertions.assertEquals(expectedStats.getRatio(), stats.getRatio(), "Ratio Stat");
+	}
+
+	private float calculateRatio(Integer humansCount, Integer mutantsCount) {
+		// no se si es correcto proque el resultado va a dar una relacion 1/1 cuando no
+		// hay humanos registrados, pero en teor'ia hay mas humanos que mutantes
+		return (float) mutantsCount / ((float) humansCount == 0 ? 1 : humansCount);
 	}
 
 }

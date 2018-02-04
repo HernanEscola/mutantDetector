@@ -5,6 +5,8 @@ public class Stats {
     Integer count_human_dna;
     Float ratio;
  
+    
+    
 	public Stats(Integer count_mutant_dna, Integer count_human_dna, Float ratio) {
 		super();
 		this.count_mutant_dna = count_mutant_dna;

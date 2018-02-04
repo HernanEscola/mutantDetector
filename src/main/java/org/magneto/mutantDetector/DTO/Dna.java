@@ -1,7 +1,6 @@
 package org.magneto.mutantDetector.DTO;
 
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description="Contenedor de la Cadena de ADN")
 public class Dna {

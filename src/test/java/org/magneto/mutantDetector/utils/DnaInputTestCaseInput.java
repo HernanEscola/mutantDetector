@@ -6,6 +6,8 @@ import java.util.List;
 import org.magneto.mutantDetector.services.MutantServiceImpl;
 /**
  * Estructura que contiene un dna input y sus respectivos resultados para luego validar contra el detector de sequencias
+ * 
+ * Estos casos solo son validos para testear sequencias de longitud 4
  * @author aion
  *
  */
@@ -63,6 +65,20 @@ public class DnaInputTestCaseInput {
 			this.valid = isValid;
 		}
 
+		
+		
+		public static DnaInputTestCaseInput getMutantDNA() {
+			return null;
+		}
+		
+		public static DnaInputTestCaseInput getHumanDNA() {
+			return null;
+		}
+		
+		public static DnaInputTestCaseInput getHumanWithInvalidSequences() {
+			return null;
+		}
+		
 		/**
 		 * Matriz que tiene 3 soluciones horizontales 3 verticales y 2 diagonales
 		 * 
@@ -72,24 +88,24 @@ public class DnaInputTestCaseInput {
 			
 			 ArrayList<DnaInputTestCaseInput> dnas = new ArrayList<DnaInputTestCaseInput>();
 		
-//			String[] dna1 = { //
-//					"AAAAA", //
-//					"ATTCT", //
-//					"ATTTT", // 
-//					"AATTT", //
-//					"ATTTT" };//
-//			// 3 verticals 3 horizontales, 1 oblicuo y 1 oblicuo inverso
-//			dnas.add(new DnaInputTestCaseInput(dna1, 3, 3, 1, 1, true));
+//		 String[] dna1 = { //
+//		 "AAAAA", //
+//		 "ATTCT", //
+//		 "ATTTT", //
+//		 "AATTT", //
+//		 "ATTTT" };//
+//		 // 3 verticals 3 horizontales, 1 oblicuo y 1 oblicuo inverso
+//		 dnas.add(new DnaInputTestCaseInput(dna1, 3, 3, 1, 1, true));
 //		
-//			String[] dna2 = { //
-//					"ACCCA", //
-//					"AAAAT", //
-//					"ACATT", //
-//					"AATAT", //
-//					"TTTTT" };//
-//			// 4 verticals 3 horizontales, 1 oblicuo y 1 oblicuo inverso
-//			dnas.add(new DnaInputTestCaseInput(dna2, 2, 2, 1, 2, true));
-//		
+//		 String[] dna2 = { //
+//		 "ACCCA", //
+//		 "AAAAT", //
+//		 "ACATT", //
+//		 "AATAT", //
+//		 "TTTTT" };//
+//		 // 4 verticals 3 horizontales, 1 oblicuo y 1 oblicuo inverso
+//		 dnas.add(new DnaInputTestCaseInput(dna2, 2, 2, 1, 2, true));
+			
 			String[] dna3 = { //
 					"TAAAAAAA", //
 					"ATGGGGAT", //
@@ -101,17 +117,29 @@ public class DnaInputTestCaseInput {
 					"CCCCATGG" };//
 			dnas.add(new DnaInputTestCaseInput(dna3, 6, 4, 3, 3, true));
 		
-//			String[] dna4 = { // //
-//					"TADAPAAC", //
-//					"OKMITNUH", //
-//					"BHUNTIMK", //
-//					"OKMITNUB", //
-//					"MKONTIBH", //
-//					"CTCTCGGO", //
-//					"MKOMMMMK", //
-//					"UHBIJNOK" };// // es inválido si valido que esté contenido en {A,T,C,G} 
-//			// solo contiene una columna de Ts, porl o tanto las otras sequencias que enceuntre no debería validarlo como mutante
-//			dnas.add(new DnaInputTestCaseInput(dna4, 0, 1, 0, 0,false));
+			String[] dna4 = { // //
+					"QQQQQQQQ", //
+					"QTTTTQQQ", //
+					"QTQQQQQQ", //
+					"QTQQQQQQ", //
+					"QTQQQQQQ", //
+					"QQQQQQQQ", //
+					"QQQQQQQQ", //
+					"QQQQQQQQ" };// // es inválido si valido que esté contenido en {A,T,C,G} 
+			// solo contiene una columna de Ts, porl o tanto las otras sequencias que enceuntre no debería validarlo como mutante
+			dnas.add(new DnaInputTestCaseInput(dna4, 1, 1, 0, 0,false));
+			
+			String[] dna5 = { // //
+					"QQQQQQQQ", //
+					"QTT TQQQ", //
+					"QTQQQQQQ", //
+					"QTQQQQQQ", //
+					"QTQQQQQQ", //
+					"QQQQQQQQ", //
+					"QQQQQQQQ", //
+					"QQQQQQQQ" };// // es inválido si valido que esté contenido en {A,T,C,G} 
+			// solo contiene una columna de Ts, porl o tanto las otras sequencias que enceuntre no debería validarlo como mutante
+			dnas.add(new DnaInputTestCaseInput(dna5, 0, 1, 0, 0,false));
 		
 			return dnas;
 		}

@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.magneto.mutantDetector.business.mutantSequenceDetector.IMutantSequenceDetector;
+import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantSequenceDetector;
 import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.HorizontalMutantSequenceDetectorImpl;
 import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.InverseObliqueMutantSequenceDetectorImpl;
 import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.ObliqueMutantSequenceDetectorImpl;
@@ -33,6 +34,8 @@ public class MutantSequenceDetectorTest {
 
 		try {
 			List<DnaInputTestCaseInput> dnas = DnaInputTestCaseInput.getTestMatrices();
+			
+			
 
 			/**
 			 * hago dos iteraciones, una con el limite minimo para que sea
@@ -48,8 +51,10 @@ public class MutantSequenceDetectorTest {
 			IMutantSequenceDetector verticalMsd = new VerticalMutantSequenceDetectorImpl();
 			IMutantSequenceDetector inverseObliquelMsd = new InverseObliqueMutantSequenceDetectorImpl();
 			IMutantSequenceDetector obliquelMsd = new ObliqueMutantSequenceDetectorImpl();
+			MutantSequenceDetector filter = new MutantSequenceDetector();
 			for (DnaInputTestCaseInput dnaStruct : dnas) {
 				String[] dna = dnaStruct.getDna();
+				dna = filter.filter(dna);
 				for (int sequencesToFind : minVal) {
 					horizontalMsd.init(sequenceLength, sequencesToFind);
 					Assert.assertEquals("Cantidad de secuencias Horitonzales Detector", Math.min(sequencesToFind, dnaStruct.getHorizontalSequences()), horizontalMsd.detect(dna));
