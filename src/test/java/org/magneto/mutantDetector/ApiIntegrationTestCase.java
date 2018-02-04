@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneto.mutantDetector.DTO.Dna;
 import org.magneto.mutantDetector.DTO.Stats;
-import org.magneto.mutantDetector.business.enums.STATS_KEYS;
+import org.magneto.mutantDetector.business.enums.EDnaType;
 import org.magneto.mutantDetector.utils.DnaInputTestCaseInput;
 import org.magneto.mutantDetector.utils.ServersManager;
 
@@ -45,8 +45,8 @@ public class ApiIntegrationTestCase {
 			client.register(JacksonJsonProvider.class);
 			client.register(JacksonFeature.class);
 			Map<Object, Integer> statsMap = new HashMap<>();
-			statsMap.put(STATS_KEYS.MUTATNS, 0);
-			statsMap.put(STATS_KEYS.HUMANS, 0);
+			statsMap.put(EDnaType.MUTANT, 0);
+			statsMap.put(EDnaType.HUMAN, 0);
 
 			log.info("Test Post DNA");
 
@@ -75,10 +75,10 @@ public class ApiIntegrationTestCase {
 
 		log.info(responseObject.toString());
 		if (dnaStruct.isMutant()) {
-			incrMapCount(statsMap, STATS_KEYS.MUTATNS);
+			incrMapCount(statsMap, EDnaType.MUTANT);
 			Assertions.assertEquals(Status.OK.getStatusCode(), responseObject.getStatus());
 		} else {
-			incrMapCount(statsMap, STATS_KEYS.HUMANS);
+			incrMapCount(statsMap, EDnaType.HUMAN);
 			Assertions.assertEquals(Status.FORBIDDEN.getStatusCode(), responseObject.getStatus());
 		}
 	}
@@ -148,8 +148,8 @@ public class ApiIntegrationTestCase {
 		Assertions.assertEquals(200, testResponse.getStatus());
 		Stats stats = testResponse.readEntity(Stats.class);
 
-		Integer humansCount = statsMap.get(STATS_KEYS.HUMANS);
-		Integer mutantsCount = statsMap.get(STATS_KEYS.MUTATNS);
+		Integer humansCount = statsMap.get(EDnaType.HUMAN);
+		Integer mutantsCount = statsMap.get(EDnaType.MUTANT);
 
 		Stats expectedStats = new Stats(mutantsCount, humansCount, calculateRatio(humansCount, mutantsCount));
 		Assertions.assertEquals(expectedStats.getCount_human_dna(), stats.getCount_human_dna(), "Humans Stat");

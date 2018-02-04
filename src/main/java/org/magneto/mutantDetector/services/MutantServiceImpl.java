@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.jvnet.hk2.annotations.Service;
 import org.magneto.mutantDetector.DTO.Dna;
+import org.magneto.mutantDetector.business.enums.EDnaType;
 import org.magneto.mutantDetector.business.mutantSequenceDetector.IMutantSequenceDetector;
 import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantSequenceDetector;
 import org.magneto.mutantDetector.database.MutantDao;
@@ -49,23 +50,22 @@ public class MutantServiceImpl implements MutantService {
 	 *             Arrojada si ocurre alg'un error al querer registrar la cadena
 	 */
 	@Override
-	public boolean analizeDna(Dna dnaData) throws InvalidDnaException, DBException {
+	public EDnaType analizeDna(Dna dnaData) throws InvalidDnaException, DBException {
 
-//		
-//		if (!isValidDna(dnaData)) {
-//			throw new InvalidDnaException();
-//		}
-		
+
 		String[] dna = dnaData.getDna();
 		boolean isMutant = isMutant(dna);
-
+		
+		EDnaType type = null;
 		if (isMutant) {
+			type = EDnaType.HUMAN;
 			registerMutantDna(dna);
 		} else {
+			type = EDnaType.MUTANT;
 			registerHuman();
 		}
 
-		return isMutant;
+		return type;
 	}
 
 	/**
@@ -77,17 +77,6 @@ public class MutantServiceImpl implements MutantService {
 	public boolean isMutant(String[] dna) {
 		int found = mutantSequenceDetector.init(SEQUENCE_LENGTH, N_SEQUENCES_TO_FIND).detect(dna);
 		return found == N_SEQUENCES_TO_FIND;
-	}
-
-	/**
-	 * TODO: Implementar Validaciones
-	 * 
-	 * @param dna
-	 * @return
-	 */
-	private boolean isValidDna(Dna dna) {
-		// TODO Implementar
-		return true;
 	}
 
 	/**

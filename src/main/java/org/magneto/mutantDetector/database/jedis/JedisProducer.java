@@ -33,23 +33,32 @@ public class JedisProducer {
 	 * @param jedis
 	 */
 	protected void initJedisPool() {
-		final JedisPoolConfig poolConfig ;
-		
+		final JedisPoolConfig poolConfig;
+
 		JedisPoolConfig config = getJedisPoolConfig();
 
 		/**
-		 * TODO: implementar clusters y variables de entorno porque este
-		 * mecanísmo para salir del paso es horrible
+		 * TODO: implementar clusters y variables de entorno porque este mecanísmo para
+		 * salir del paso es horrible
 		 */
-		String[] redisHosts = {"localhost",  "singleredis.6jvhk9.0001.sae1.cache.amazonaws.com" };
+		String[] redisHosts = { "localhost" };
 
 		String redisHost = null, redisPort = null;
 		Jedis jResource = null;
+
+		for (String key : System.getenv().keySet()) {
+			log.info(key + "=" + System.getenv().get(key));
+		}
+
+		log.info("Redis=" + System.getenv().get("REDIS_HOST"));
+		// redisHost = System.getenv().getOrDefault("REDIS_HOST", host);
+
 		for (String host : redisHosts) { // esto
 			try {
 
 				redisHost = System.getenv().getOrDefault("REDIS_HOST", host);
 				redisPort = System.getenv().getOrDefault("REDIS_PORT", REDIS_PORT);
+
 				jedisPool = new JedisPool(config, redisHost, Integer.valueOf(redisPort), 2000);
 
 				jResource = jedisPool.getResource(); // intento obtener una
@@ -80,9 +89,10 @@ public class JedisProducer {
 			log.info("Jedis Pool Inicializado");
 		}
 	}
-	
+
 	/**
 	 * Retorna la configuración del pool de Jedis
+	 * 
 	 * @return
 	 */
 	private JedisPoolConfig getJedisPoolConfig() {
@@ -139,11 +149,11 @@ public class JedisProducer {
 	 * @param jedis
 	 */
 	public void backToPool(Jedis jedis) {
-		if(jedis!=null) {
+		if (jedis != null) {
 			jedis.close();
 		}
 		// No se devuelve mas al pool según la documentación
-		
+
 	}
 
 }
