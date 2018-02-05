@@ -41,7 +41,7 @@ public class StatsDaoTest extends TestWithNewRedisServerInstance {
 	public void testRatio() {
 		try {
 			int humans = 100;
-			int mutants = 60;
+			int mutants = 40;
 			Stats expected = new Stats(mutants, humans, ((float) mutants / humans));
 			for (int h = 0; h < humans; h++) {
 				statsDao.addHuman();
