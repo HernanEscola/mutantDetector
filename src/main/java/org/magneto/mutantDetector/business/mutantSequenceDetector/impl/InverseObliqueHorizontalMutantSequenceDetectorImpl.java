@@ -13,7 +13,6 @@ public class InverseObliqueHorizontalMutantSequenceDetectorImpl extends MutantSe
 
 	@Override
 	public int getRow(int r, int s) {
-		// TODO Auto-generated method stub
 		return size - 1 - s;
 	}
 	

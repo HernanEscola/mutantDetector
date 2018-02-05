@@ -54,6 +54,14 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 		return find(dna);
 	}
 
+	/**
+	 * Este metodo es medio sucio
+	 * 
+	 * Quizas si lo pienso un poco mas puedo llegar a acomodarlo
+	 * 
+	 * @param dna
+	 * @return
+	 */
 	public int find(String[] dna) {
 		int count = 0;
 		int found = 0;
@@ -61,6 +69,7 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 		int row = 0, column = 0;
 		char current;
 		char charForSequence;
+		int lastCloumnSequence, lastRowSequence;
 		/**
 		 * Puedo acotar optimizarlo un poco más
 		 */
@@ -74,15 +83,16 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 
 			// String word = "";
 			for (int offset = 0; offset < size && found < numberOfSequencesToFind; offset++) {
-
+				
 				row = getRow(r, offset);
-
 				column = getColumn(r, offset);
-
 				// valido que la posición sea válida
 				if (!isInsideMatrix(row, column)) {
 					break;
 				} else {
+
+					// lastCloumnSequence = getColumn(r, offset+3);
+					// lastRowSequence = getRow(r, offset+3);
 					// si es una solución válida
 					current = dna[row].charAt(column);
 					if (charForSequence == ' ' || current == ' ') {
@@ -90,8 +100,6 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 						// word = "";
 						// chequear si la siguiente sequencia finaliza en una
 						// columna y fila válida
-						if (!isInsideMatrix(r, offset + 3))
-							break;
 					}
 
 					if (current == charForSequence && charForSequence != ' ') {
@@ -117,10 +125,9 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 						charForSequence = current;
 						count = 1;
 
-						if (!isInsideMatrix(r, offset + 3))
-							break;
-						// log.info(word);
-						// word = charForSequence+ "";
+						// if (!isInsideMatrix(row, lastCloumnSequence)){
+						// break;
+						// }
 					}
 				}
 

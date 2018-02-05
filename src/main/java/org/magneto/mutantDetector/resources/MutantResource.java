@@ -30,7 +30,7 @@ public class MutantResource {
 	public MutantServiceImpl mutantService;
 
 	/**
-	 * @param dna
+	 * @param dna DNA Analizar
 	 * @return
 	 * @throws Exception
 	 */

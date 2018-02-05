@@ -1,11 +1,8 @@
 
 package org.magneto.mutantDetector.business.mutantDetector;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneto.mutantDetector.DTO.Dna;
 import org.magneto.mutantDetector.business.mutantSequenceDetector.IMutantSequenceDetector;
 import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantSequenceDetector;
 import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.HorizontalMutantSequenceDetectorImpl;
@@ -13,7 +10,6 @@ import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.InverseOb
 import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.ObliqueMutantSequenceDetectorImpl;
 import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.VerticalMutantSequenceDetectorImpl;
 import org.magneto.mutantDetector.services.MutantServiceImpl;
-import org.magneto.mutantDetector.services.interfaces.MutantService;
 import org.magneto.mutantDetector.utils.DnaInputTestCaseInput;
 
 import lombok.extern.log4j.Log4j;
@@ -95,7 +91,7 @@ public class MutantSequenceDetectorTest {
 	public void inverseObliqueSequenceDetectorTest() throws Exception {
 		IMutantSequenceDetector oblicqueMsd = new InverseObliqueMutantSequenceDetectorImpl();
 		DnaInputTestCaseInput dna = DnaInputTestCaseInput.getExhativeCaseMutantDNA();
-		String message = "OBLICUOS INVERSP";
+		String message = "OBLICUOS INVERSOS";
 		genericMutantSequenceDetectorTest(oblicqueMsd, message, dna.getInverseObliqueSequences(), dna.getDna());
 	}
 
@@ -112,7 +108,7 @@ public class MutantSequenceDetectorTest {
 		try {
 			String message = "Detector de Cantidad de secuencias " + tipoDetector;
 			int sequenceLength = 4;
-			int[] minVal = { 1, Integer.MAX_VALUE };
+			int[] minVal = {  Integer.MAX_VALUE };
 
 			// INVOCACION AL METODO PARA FILTRAR LOS CARACERES
 			// INVALIDOS REEMPLAZANDOLOS POR UN PLACEGHOLDER
