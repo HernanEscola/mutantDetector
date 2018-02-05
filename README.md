@@ -14,19 +14,19 @@ String[] dna = {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"};
 
 ## Tecnologías
 
-Java 8
-Maven - Administración y distribución del proyecto
-Jersey - Api Resful
-H2k - Injección de dependencias
-Grizzly y Embeded Redis - Test de integración y  generación de standalone app. Cuenta con un Server bmbebido de Redis que sólo se ejecuta en memoria.
-Swagger - Generación de documentación de la API. Swagger-UI disponible para visualizar las especificaciones de la API
-Junit - Test
-Jacoco - Reporte de cobertura de tests
-Jedis - Cliente Redis
-Redis - Base de Datos
-Tomcat 8 - WebServer
-Amazon EC2 y ElasticCache - Alojamiento de la API
-IDE - Eclipse
+* Java 8
+* Maven - Administración y distribución del proyecto
+* Jersey - Api Restful
+* H2k - Injección de dependencias
+* Grizzly y Embeded Redis - Test de integración y  generación de standalone app. Cuenta con un Server bmbebido de Redis que sólo se ejecuta en memoria.
+* Swagger - Generación de documentación de la API. Swagger-UI disponible para visualizar las especificaciones de la API
+* Junit - Test
+* Jacoco - Reporte de cobertura de tests
+* Jedis - Cliente Redis
+* Redis - Base de Datos
+* Tomcat 8 - WebServer
+* Amazon EC2 y ElasticCache - Alojamiento de la API
+* IDE - Eclipse
 
 
 #Demo de la API
@@ -87,7 +87,7 @@ Presione una tecla para finalizar...
 En la Ruta /coverage/jacoco-resources/index.html se puede ver el informe de la cobertura del código testeado.
 
 
-## Deployment
+## Deploy
 
 Para generar el WAR para deployarlo en un server Tomcat 8, ejecutar:
 

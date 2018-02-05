@@ -15,7 +15,7 @@ public class InverseObliqueVerticalMutantSequenceDetectorImpl extends MutantSequ
 	@Override
 	public int getRow(int r, int s) {
 		return r - s;
-		// size-1 - r - s; //Este otro retorno tambien es v'alido pero tiene mas
+		// size-1 - r - s; //Este otro retorno tambien es válido pero tiene mas
 		// oferaciones. Si supiera que las matrices son de 6x6 siempre, me servir'ia
 		// para optimizar un poco mas, cortando antes de llegar a los limites, pero si
 		// en cambio son matrices grandes, voy a estar haciendo operaciones de mas la

@@ -52,7 +52,7 @@ public class MutantSequenceDetector extends MultiMutantSequenceDetectorImpl {
 	 */
 	public boolean isValid(String[] dna, int sequencesLength) {
 
-		// No estoy seguro si este caso es inv'alido o Humano
+		// No estoy seguro si este caso es inválido o Humano
 		if (dna.length < sequencesLength) {
 
 			// la logitud secuencia a encontrar es menor que el tamaño de la matriz
