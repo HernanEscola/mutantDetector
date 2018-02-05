@@ -69,7 +69,6 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 		int row = 0, column = 0;
 		char current;
 		char charForSequence;
-		int lastCloumnSequence, lastRowSequence;
 		/**
 		 * Puedo acotar optimizarlo un poco más
 		 */
@@ -83,7 +82,7 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 
 			// String word = "";
 			for (int offset = 0; offset < size && found < numberOfSequencesToFind; offset++) {
-				
+
 				row = getRow(r, offset);
 				column = getColumn(r, offset);
 				// valido que la posición sea válida
@@ -91,8 +90,6 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 					break;
 				} else {
 
-					// lastCloumnSequence = getColumn(r, offset+3);
-					// lastRowSequence = getRow(r, offset+3);
 					// si es una solución válida
 					current = dna[row].charAt(column);
 					if (charForSequence == ' ' || current == ' ') {
