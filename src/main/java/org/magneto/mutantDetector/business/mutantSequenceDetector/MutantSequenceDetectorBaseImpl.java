@@ -109,7 +109,7 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 							// log.info("found " + word + " in " + row+", "
 							// +column);
 							if (++found >= numberOfSequencesToFind) {
-								break;
+								return found;
 							}
 							charForSequence = ' ';
 							count = 0;
