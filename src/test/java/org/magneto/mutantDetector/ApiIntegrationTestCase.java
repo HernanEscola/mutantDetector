@@ -61,9 +61,8 @@ public class ApiIntegrationTestCase {
 	}
 
 	private void testAllAdnTestCasesSingleMutantApiRequest(final URI baseUrl, Client client, Map<Object, Integer> statsMap) {
-		for (DnaInputTestCaseInput dnaStruct : DnaInputTestCaseInput.getTestMatrices()) {
+		for (DnaInputTestCaseInput dnaStruct : DnaInputTestCaseInput.getAllTestMatrices()) {
 			testSingleMutantApiRequest(baseUrl, client, statsMap, dnaStruct);
-
 		}
 	}
 
@@ -74,7 +73,9 @@ public class ApiIntegrationTestCase {
 		Response responseObject = postTarget.request(MediaType.TEXT_PLAIN_TYPE).post(Entity.entity(dna, MediaType.APPLICATION_JSON_TYPE), Response.class);
 
 		log.info(responseObject.toString());
-		if (dnaStruct.isMutant()) {
+		if (!dnaStruct.isValid()) {
+			Assertions.assertEquals(Status.BAD_REQUEST.getStatusCode(), responseObject.getStatus());
+		} else if (dnaStruct.isMutant()) {
 			incrMapCount(statsMap, EDnaType.MUTANT);
 			Assertions.assertEquals(Status.OK.getStatusCode(), responseObject.getStatus());
 		} else {
@@ -83,56 +84,10 @@ public class ApiIntegrationTestCase {
 		}
 	}
 
-	//
-	// public void otro() throws Exception {
-	// for (int i = 0; i < 5; i++) {
-	//
-	// final URI baseUrl = new
-	// URI("http://52.67.163.113:8080/magnetoCorp/api/");
-	//
-	// // MainApp.main(new String[0]); // start the app
-	// Client client = JerseyClientBuilder.newBuilder().build();
-	// client.register(JacksonJsonProvider.class);
-	// client.register(JacksonFeature.class);
-	// int humansCount = 0;
-	// int mutantsCount = 0;
-	// log.info("DNA PING TEST");
-	//
-	// WebTarget target = client.target(baseUrl).path("/mutant/test");
-	// Response testResponse = target.request(MediaType.TEXT_PLAIN_TYPE).get();
-	// log.info(testResponse.toString());
-	// Assertions.assertEquals(200, testResponse.getStatus());
-	// Assertions.assertEquals("Activo", testResponse.readEntity(String.class));
-	//
-	// log.info("Test Post DNA");
-	//
-	// for (DnaInputTestCaseInput dnaStruct :
-	// DnaInputTestCaseInput.getTestMatrices()) {
-	//
-	// WebTarget postTarget = client.target(baseUrl).path("/mutant");
-	// Response responseObject =
-	// postTarget.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.entity(dnaStruct.getDna(),
-	// MediaType.APPLICATION_JSON_TYPE),
-	// Response.class);
-	//
-	// log.info(responseObject.toString());
-	// if (dnaStruct.isMutant()) {
-	// mutantsCount++;
-	// Assertions.assertEquals(Status.OK.getStatusCode(),
-	// responseObject.getStatus());
-	// } else {
-	// humansCount++;
-	// Assertions.assertEquals(Status.FORBIDDEN.getStatusCode(),
-	// responseObject.getStatus());
-	// }
-	//
-	// }
-	//
-	// }
-	// }
-
 	/**
-	 * TODO: Armar lib con utilidaes
+	 * TODO: Mover a una Clase utils Incrementa en uno el valor que se encuentra en
+	 * la clave pasada por par
+	 * 
 	 */
 	private Integer incrMapCount(Map<Object, Integer> map, Object key) {
 		return map.compute(key, (k, v) -> v == null ? 1 : v + 1);

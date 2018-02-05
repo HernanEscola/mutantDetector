@@ -26,12 +26,11 @@ public class MutantDaoTest extends TestWithNewRedisServerInstance {
 
 	@Test
 	public void saveMutantDnaTest() {
-		DnaInputTestCaseInput it = DnaInputTestCaseInput.getTestMatrices().get(0);
+		DnaInputTestCaseInput it = DnaInputTestCaseInput.getMutantDNA();
 		MutantDao mutantDao;
 		mutantDao = new MutantDao();
 		try {
 			Assertions.assertTrue(mutantDao.saveMutantDna(it.getDna()), () -> "Se registro una nueva cadena");
-			Assertions.assertFalse(mutantDao.saveMutantDna(it.getDna()), () -> "Se registro nuevammente la misma cadena");
 			Assertions.assertFalse(mutantDao.saveMutantDna(it.getDna()), () -> "Se registro nuevammente la misma cadena");
 		} catch (DBException e) {
 			Assertions.fail(e);

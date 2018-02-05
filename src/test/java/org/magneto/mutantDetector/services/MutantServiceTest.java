@@ -2,7 +2,6 @@ package org.magneto.mutantDetector.services;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,6 +13,7 @@ import org.magneto.mutantDetector.business.enums.EDnaType;
 import org.magneto.mutantDetector.database.MutantDao;
 import org.magneto.mutantDetector.database.StatsDao;
 import org.magneto.mutantDetector.exceptions.DBException;
+import org.magneto.mutantDetector.exceptions.InvalidDnaException;
 import org.magneto.mutantDetector.services.interfaces.MutantService;
 import org.magneto.mutantDetector.utils.DnaInputTestCaseInput;
 import org.magneto.mutantDetector.utils.TestWithNewRedisServerInstance;
@@ -38,12 +38,12 @@ public class MutantServiceTest extends TestWithNewRedisServerInstance {
 
 	@Test
 	public void testIsMutant() {
-
-		List<DnaInputTestCaseInput> dnas = DnaInputTestCaseInput.getTestMatrices();
-
-		for (DnaInputTestCaseInput dnaStruct : dnas) {
-			Assert.assertEquals(dnaStruct.isMutant(), instantiateMuntantService().isMutant(dnaStruct.getDna()));
-		}
+		// List<DnaInputTestCaseInput> dnas = DnaInputTestCaseInput.getTestMatrices();
+		DnaInputTestCaseInput humanDna = DnaInputTestCaseInput.getHumanDNA();
+		DnaInputTestCaseInput mutantDna = DnaInputTestCaseInput.getMutantDNA();
+		MutantService mutantService = instantiateMuntantService();
+		Assertions.assertFalse(mutantService.isMutant(humanDna.getDna()), "Es mutante");
+		Assertions.assertTrue(mutantService.isMutant(mutantDna.getDna()), "Es mutante");
 	}
 
 	@Test
@@ -67,7 +67,7 @@ public class MutantServiceTest extends TestWithNewRedisServerInstance {
 	 */
 	public void analizeDnaTest() {
 
-		List<DnaInputTestCaseInput> dnas = DnaInputTestCaseInput.getTestMatrices();
+		List<DnaInputTestCaseInput> dnas = DnaInputTestCaseInput.getAllTestMatrices();
 		MutantService service = instantiateMuntantService();
 		for (DnaInputTestCaseInput dnaStruct : dnas) {
 			Dna dna = new Dna();
@@ -77,6 +77,8 @@ public class MutantServiceTest extends TestWithNewRedisServerInstance {
 				Assertions.assertEquals((dnaStruct.isMutant() ? EDnaType.MUTANT : EDnaType.HUMAN), service.analizeDna(dna));
 			} catch (DBException e) {
 				Assertions.fail(e);
+			} catch (InvalidDnaException e) {
+				Assertions.assertFalse(dnaStruct.isValid());
 			}
 		}
 	}

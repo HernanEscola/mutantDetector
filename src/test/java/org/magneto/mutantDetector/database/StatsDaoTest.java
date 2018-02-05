@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.magneto.mutantDetector.DTO.Stats;
 import org.magneto.mutantDetector.database.StatsDao;
@@ -22,7 +23,7 @@ public class StatsDaoTest extends TestWithNewRedisServerInstance {
 
 	private StatsDao statsDao;
 
-	@BeforeAll
+	@BeforeEach
 	public void setup() {
 		super.setup();
 		statsDao = new StatsDao();
@@ -34,17 +35,39 @@ public class StatsDaoTest extends TestWithNewRedisServerInstance {
 	}
 
 	@Test
+	/**
+	 * Test utilizando caso de ejemplo del enunciado
+	 */
+	public void testRatio() {
+		try {
+			int humans = 100;
+			int mutants = 60;
+			Stats expected = new Stats(mutants, humans, ((float) mutants / humans));
+			for (int h = 0; h < humans; h++) {
+				statsDao.addHuman();
+			}
+			for (int m = 0; m < mutants; m++) {
+				statsDao.addMutant();
+			}
+
+			Stats stats = statsDao.getStats();
+
+			assertEquals(expected.getCount_human_dna(), stats.getCount_human_dna(), () -> "Humans Stat");
+			assertEquals(expected.getCount_mutant_dna(), stats.getCount_mutant_dna(), () -> "Mutants Stat ");
+			assertEquals(expected.getRatio(), stats.getRatio(), () -> "Ratio Stat Humans/Mutant");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Assertions.fail(e);
+		}
+	}
+
+	@Test
 	public void addHumanTest() {
 		Long humans = 0l;
 		// Todo: Refactorizar
 		try {
 			assertEquals(statsDao.addHuman(), ++humans, () -> "Humanos consultados");
 			assertEquals(statsDao.addHuman(), ++humans, () -> "Humanos consultados");
-			assertStats(0L, humans);
-		} catch (DBException e1) {
-			fail(e1);
-		}
-		try {
 			ServersManager.stopRedisCurrentInstance();
 			statsDao.addHuman(); // Arroja excepción al no tener el server
 			Assertions.fail("Se Esperaba una excepción");
@@ -54,7 +77,7 @@ public class StatsDaoTest extends TestWithNewRedisServerInstance {
 		} finally {
 			try {
 				ServersManager.getRedisStarted();
-			} catch (IOException e) {
+			} catch (Exception e) {
 				fail(e);
 			}
 		}
@@ -71,11 +94,10 @@ public class StatsDaoTest extends TestWithNewRedisServerInstance {
 			// Todo: Refactorizar
 			assertEquals(statsDao.addMutant(), ++mutants, () -> "Se registraro 1 Mutantes");
 			assertEquals(statsDao.addMutant(), ++mutants, () -> "Se registraron 2 Mutantes");
-			assertStats(mutants, 0l);
 		} catch (Exception e) {
 			fail(e);
 		}
-		// test Excepttion
+		// test Exception
 		try {
 			ServersManager.stopRedisCurrentInstance();
 			statsDao.addMutant(); // Arroja excepción al no tener el server
@@ -90,38 +112,6 @@ public class StatsDaoTest extends TestWithNewRedisServerInstance {
 				fail(e);
 			}
 		}
-	}
-
-	@Test
-	public void ratioTest() {
-		try {
-			ServersManager.startCleanRedisInstance();
-		} catch (IOException e) {
-			fail(e);
-		}
-		long mutants = 4, humans = 2;
-		try {
-			assertStats(0L, 0L);
-			for (int i = 0; i < mutants; i++) {
-				statsDao.addMutant();
-			}
-			for (int i = 0; i < humans; i++) {
-				statsDao.addHuman();
-			}
-			assertStats(mutants, humans);
-
-		} catch (Exception e) {
-			fail(e);
-		}
-	}
-
-	private Stats assertStats(Long mutants, Long humans) throws DBException {
-		Stats stats = statsDao.getStats();
-		Float ratio = (float) mutants / ((float) humans == 0 ? 1 : humans);
-		assertEquals(stats.getCount_human_dna(), Integer.valueOf(humans.intValue()), () -> "Humans Stat");
-		assertEquals(stats.getCount_mutant_dna(), Integer.valueOf(mutants.intValue()), () -> "Mutants Stat ");
-		assertEquals(stats.getRatio(), ratio, () -> "Ratio Stat Humans/Mutant");
-		return stats;
 	}
 
 }

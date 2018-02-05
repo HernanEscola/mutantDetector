@@ -5,10 +5,10 @@ import javax.inject.Inject;
 import org.jvnet.hk2.annotations.Service;
 import org.magneto.mutantDetector.DTO.Dna;
 import org.magneto.mutantDetector.business.enums.EDnaType;
-import org.magneto.mutantDetector.business.mutantSequenceDetector.IMutantSequenceDetector;
 import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantSequenceDetector;
 import org.magneto.mutantDetector.database.MutantDao;
 import org.magneto.mutantDetector.exceptions.DBException;
+import org.magneto.mutantDetector.exceptions.InvalidDnaException;
 import org.magneto.mutantDetector.services.interfaces.MutantService;
 
 import lombok.extern.log4j.Log4j;
@@ -17,7 +17,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class MutantServiceImpl implements MutantService {
 
-	final public static int SEQUENCE_LENGTH = 4;
+	final public static int MUTANT_SEQUENCE_LENGTH = 4;
 	final public static int N_SEQUENCES_TO_FIND = 2;
 
 	@Inject
@@ -25,7 +25,7 @@ public class MutantServiceImpl implements MutantService {
 	@Inject
 	private StatsServiceImpl statsService;
 
-	private IMutantSequenceDetector mutantSequenceDetector = new MutantSequenceDetector();
+	private MutantSequenceDetector mutantSequenceDetector = new MutantSequenceDetector();
 
 	public MutantServiceImpl() {
 		super();
@@ -38,20 +38,15 @@ public class MutantServiceImpl implements MutantService {
 		this.statsService = statsService;
 	}
 
-	/**
-	 * Analiza la cadena de de ADN en búsqueda del GEN Mutante
-	 * 
-	 * Asumo que recibo una cadena de ADN válida
-	 * 
-	 * @param dna
-	 * @return true si la cadena es una cadena de ADN Mutante, sino false
-	 * @throws DBException
-	 *             Arrojada si ocurre alg'un error al querer registrar la cadena
-	 */
 	@Override
-	public EDnaType analizeDna(Dna dnaData) throws DBException {
+	public EDnaType analizeDna(Dna dnaData) throws DBException, InvalidDnaException {
 
 		String[] dna = dnaData.getDna();
+
+		if (!mutantSequenceDetector.isValid(dna, MUTANT_SEQUENCE_LENGTH)) {
+			throw new InvalidDnaException();
+		}
+
 		boolean isMutant = isMutant(dna);
 
 		EDnaType type = null;
@@ -73,7 +68,7 @@ public class MutantServiceImpl implements MutantService {
 	 * @return
 	 */
 	public boolean isMutant(String[] dna) {
-		int found = mutantSequenceDetector.init(SEQUENCE_LENGTH, N_SEQUENCES_TO_FIND).detect(dna);
+		int found = mutantSequenceDetector.init(MUTANT_SEQUENCE_LENGTH, N_SEQUENCES_TO_FIND).detect(dna);
 		return found == N_SEQUENCES_TO_FIND;
 	}
 
