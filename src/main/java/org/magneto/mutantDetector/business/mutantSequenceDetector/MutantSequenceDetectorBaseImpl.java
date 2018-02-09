@@ -8,7 +8,7 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 	protected int numberOfSequencesToFind;
 	protected int size;
 	protected int sequenceLength;
-	protected String[] dna;
+	// protected String[] dna;
 
 	public MutantSequenceDetectorBaseImpl(int sequenceLength, int numberOfSequencesToFind) {
 		super();
@@ -49,7 +49,6 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 
 	@Override
 	public int detect(String[] dna) {
-		// TODO Auto-generated method stub
 		size = dna.length;
 		return find(dna);
 	}
@@ -63,74 +62,106 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 	 * @return
 	 */
 	public int find(String[] dna) {
-		int count = 0;
 		int found = 0;
+		// int count = 0;
 
-		int row = 0, column = 0;
-		char current;
-		char charForSequence;
+		//
+		// int row = 0, column = 0;
+		// char current;
+		// char charForSequence;
 		/**
 		 * Puedo acotar optimizarlo un poco más
+		 * 
+		 * Itero por los puntos de partida desde los cuales recorro sobre la matriz en
+		 * una direcci'on espec'ifica seg'un la implementaci'on del detector, en
+		 * b'usqueda de las secuencias
+		 * 
+		 *
 		 */
 		for (int r = 0; r < size && found < numberOfSequencesToFind; r++) {
 
-			charForSequence = ' ';
-			count = 0;
-			/**
-			 * Recoro la sequencia
-			 */
+			found = searchForward(dna, found, r);
 
-			// String word = "";
-			for (int offset = 0; offset < size && found < numberOfSequencesToFind; offset++) {
-
-				row = getRow(r, offset);
-				column = getColumn(r, offset);
-				// valido que la posición sea válida
-				if (!isInsideMatrix(row, column)) {
-					break;
-				} else {
-
-					// si es una solución válida
-					current = dna[row].charAt(column);
-					if (charForSequence == ' ' || current == ' ') {
-						charForSequence = current;
-						// word = "";
-						// chequear si la siguiente sequencia finaliza en una
-						// columna y fila válida
-					}
-
-					if (current == charForSequence && charForSequence != ' ') {
-						// Si matchea avanzo en busqueda de la sequencia
-
-						count++;
-						// word += charForSequence + "";
-						if (count == sequenceLength) {
-
-							// log.info("found " + word + " in " + row+", "
-							// +column);
-							if (++found >= numberOfSequencesToFind) {
-								return found;
-							}
-							charForSequence = ' ';
-							count = 0;
-							// word="";
-						}
-
-					} else {
-						// Si no corresponde a una secuencia inicio la búsqueda
-						// con el current char y continuo
-						charForSequence = current;
-						count = 1;
-
-						// if (!isInsideMatrix(row, lastCloumnSequence)){
-						// break;
-						// }
-					}
-				}
-
-			}
 		}
 		return found;
+	}
+
+	/**
+	 * Recorre la matriz partiendo del punto de partida definido por "r", y offset
+	 * define el index del valor
+	 * 
+	 * Para explicarlo un poco mas sencillo, por cada R lo que realiza es algo
+	 * similar a una funci'on linel, en cada detector defino que dada las entradas
+	 * "r" y Offset, obtengo un X e Y. A mismo valor de "r" cada valor de offset
+	 * describe un punto de una recta. En el caso del detector horizontal, "r" es
+	 * equivalente al valor de "Y", y "offset" es "X, es decir que con Y=0, X
+	 * describe la recta que inicia en el origen y finaliza en X = N-1, donde N es
+	 * el tamaño de la matriz
+	 * 
+	 * @param dna
+	 * @param found
+	 * @param r
+	 * @return
+	 */
+	private int searchForward(String[] dna, int found, int r) {
+		char toSearch;
+		int row;
+		int column;
+		int length;
+		for (int offset = 0; offset < size && found < numberOfSequencesToFind; offset++) {
+			row = getRow(r, offset);
+			column = getColumn(r, offset);
+
+			if (!isInsideMatrix(row, column)) {
+				break;
+			}
+
+			toSearch = dna[row].charAt(column);
+			length = countSequenceLength(dna, r, offset, toSearch);
+			if (length == sequenceLength) {
+				if (++found >= numberOfSequencesToFind) {
+					return found;
+				}
+			}
+
+			// ya recorr'i Lenght, por lo tanto continuo iterando desde ese punto. Resto uno
+			// porque el for le suma uno
+			offset += (length - 1);
+
+		}
+		return found;
+	}
+
+	/**
+	 * Itera hacia delante (segund el detector que se utilice) en busqueda de una
+	 * secuencia de caracteres iguales al parametro "toSearch"
+	 * 
+	 * @param dna
+	 *            Matriz a buscar secuencia
+	 * @param r
+	 *            Posici'on de inicio de la busqueda de secuencia
+	 * @param offset
+	 *            Es el offset actual del cual se obtuvo el caracter a buscar.
+	 * @param toSearch
+	 *            caracter a buscar
+	 * @return
+	 */
+	private int countSequenceLength(String[] dna, int r, int offset, char toSearch) {
+		int row;
+		int column;
+		int limit = offset + sequenceLength;
+		int count = 1;
+
+		for (int i = offset + 1; i < limit; i++) {
+			row = getRow(r, i);
+			column = getColumn(r, i);
+			if (!isInsideMatrix(row, column) || toSearch != dna[row].charAt(column)) {
+				break;
+			}
+			count++;
+		}
+
+		return count;
 	}
 
 }
