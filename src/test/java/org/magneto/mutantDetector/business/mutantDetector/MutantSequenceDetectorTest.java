@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j;
 public class MutantSequenceDetectorTest {
 
 	@Test
-	public void testIsMutant() {
+	public void testIsValidDNA() {
 		DnaInputTestCaseInput humanDna = DnaInputTestCaseInput.getHumanDNA();
 		DnaInputTestCaseInput mutantDna = DnaInputTestCaseInput.getMutantDNA();
 		DnaInputTestCaseInput invalidDna = DnaInputTestCaseInput.getInvalidDNA();
@@ -108,7 +108,7 @@ public class MutantSequenceDetectorTest {
 		try {
 			String message = "Detector de Cantidad de secuencias " + tipoDetector;
 			int sequenceLength = 4;
-			int[] minVal = {  Integer.MAX_VALUE };
+			int[] minVal = {2,  Integer.MAX_VALUE };
 
 			// INVOCACION AL METODO PARA FILTRAR LOS CARACERES
 			// INVALIDOS REEMPLAZANDOLOS POR UN PLACEGHOLDER
