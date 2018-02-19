@@ -48,6 +48,7 @@ public class MutantResource {
 			if (type == EDnaType.MUTANT) {
 				return Response.ok("ADN Mutante").build();
 			} else {
+				
 				return Response.status(Status.FORBIDDEN).entity("ADN Humano").build();
 			}
 		} catch (InvalidDnaException e) {

@@ -16,15 +16,8 @@ public interface MutantService {
 	 * @return true si la cadena es una cadena de ADN Mutante, sino false
 	 * @throws DBException
 	 *             Arrojada si ocurre alg'un error al querer registrar la cadena
-	 * @throws InvalidDnaException 
+	 * @throws InvalidDnaException
 	 */
 	public EDnaType analizeDna(Dna dna) throws DBException, InvalidDnaException;
 
-	/**
-	 * Ejecuta el código que analiza si es mutante o no
-	 * 
-	 * @param dnaData
-	 * @return
-	 */
-	public boolean isMutant(String[] dna);
 }

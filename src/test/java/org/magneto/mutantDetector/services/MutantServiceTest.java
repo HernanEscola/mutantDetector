@@ -36,30 +36,7 @@ public class MutantServiceTest extends TestWithNewRedisServerInstance {
 		super.finish();
 	}
 
-	@Test
-	public void testIsMutant() {
-		// List<DnaInputTestCaseInput> dnas = DnaInputTestCaseInput.getTestMatrices();
-		DnaInputTestCaseInput humanDna = DnaInputTestCaseInput.getHumanDNA();
-		DnaInputTestCaseInput mutantDna = DnaInputTestCaseInput.getMutantDNA();
-		MutantService mutantService = instantiateMuntantService();
-		Assertions.assertFalse(mutantService.isMutant(humanDna.getDna()), "Es mutante");
-		Assertions.assertTrue(mutantService.isMutant(mutantDna.getDna()), "Es mutante");
-	}
 
-	@Test
-	public void isMutantSpeedTest() {
-
-		String[] dna = DnaInputTestCaseInput.getHumanDNA().getDna();
-		MutantService service = instantiateMuntantService();
-		Long start = System.currentTimeMillis();
-		int iterations = 1000000;
-		for (int i = 0; i < iterations; i++) {
-			service.isMutant(dna);
-		}
-
-		Long finish = System.currentTimeMillis();
-		log.info("Finish Speed test in" + (finish - start) + "ms");
-	}
 
 	@Test
 	/**

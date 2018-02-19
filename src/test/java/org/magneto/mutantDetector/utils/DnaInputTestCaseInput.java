@@ -3,7 +3,7 @@ package org.magneto.mutantDetector.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.magneto.mutantDetector.services.MutantServiceImpl;
+import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantDetector;
 
 /**
  * Estructura que contiene un dna input y sus respectivos resultados para luego
@@ -31,7 +31,7 @@ public class DnaInputTestCaseInput {
 		this.obliqueSequences = obliqueSequences;
 		this.inverseObliqueSequences = inverseSequences;
 		this.isValid = true;
-		this.isMutant = (this.horizontalSequences + this.verticalSequences + obliqueSequences + inverseSequences) >= MutantServiceImpl.N_SEQUENCES_TO_FIND;
+		this.isMutant = (this.horizontalSequences + this.verticalSequences + obliqueSequences + inverseSequences) >= MutantDetector.N_SEQUENCES_TO_FIND;
 	}
 
 	public DnaInputTestCaseInput(String[] dna, boolean valid) {
