@@ -9,7 +9,6 @@ public class HorizontalSequenceDetectorImpl extends AbstractFixedSequenceWithCon
 	public HorizontalSequenceDetectorImpl(int sequenceLength) {
 		super(sequenceLength);
 	}
-
 	
 	@Override
 	public Coordinates transformToCoordinate(int sequenceIndexToSearchIn, int characterPosition) {
