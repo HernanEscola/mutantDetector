@@ -14,13 +14,11 @@ import org.magneto.mutantDetector.database.MutantDao;
 import org.magneto.mutantDetector.database.StatsDao;
 import org.magneto.mutantDetector.exceptions.DBException;
 import org.magneto.mutantDetector.exceptions.InvalidDnaException;
-import org.magneto.mutantDetector.services.interfaces.MutantService;
+import org.magneto.mutantDetector.services.impl.MutantServiceImpl;
+import org.magneto.mutantDetector.services.impl.StatsServiceImpl;
 import org.magneto.mutantDetector.utils.DnaInputTestCaseInput;
 import org.magneto.mutantDetector.utils.TestWithNewRedisServerInstance;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @TestInstance(Lifecycle.PER_CLASS)
 public class MutantServiceTest extends TestWithNewRedisServerInstance {
 
@@ -36,21 +34,17 @@ public class MutantServiceTest extends TestWithNewRedisServerInstance {
 		super.finish();
 	}
 
-
-
 	@Test
 	/**
 	 * TODO: Agregar Mock para solamente testear analizeDNA
 	 */
 	public void analizeDnaTest() {
-
 		List<DnaInputTestCaseInput> dnas = DnaInputTestCaseInput.getAllTestMatrices();
 		MutantService service = instantiateMuntantService();
 		for (DnaInputTestCaseInput dnaStruct : dnas) {
 			Dna dna = new Dna();
 			dna.setDna(dnaStruct.getDna());
 			try {
-
 				Assertions.assertEquals((dnaStruct.isMutant() ? EDnaType.MUTANT : EDnaType.HUMAN), service.analizeDna(dna));
 			} catch (DBException e) {
 				Assertions.fail(e);

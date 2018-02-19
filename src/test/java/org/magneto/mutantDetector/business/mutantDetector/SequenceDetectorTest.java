@@ -3,15 +3,10 @@ package org.magneto.mutantDetector.business.mutantDetector;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-import org.magneto.mutantDetector.business.mutantSequenceDetector.DnaValidator;
-import org.magneto.mutantDetector.business.mutantSequenceDetector.IMutantSequenceDetector;
-import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantDetector;
-import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.HorizontalMutantSequenceDetectorImpl;
-import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.InverseObliqueMutantSequenceDetectorImpl;
-import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.ObliqueMutantSequenceDetectorImpl;
-import org.magneto.mutantDetector.business.mutantSequenceDetector.impl.VerticalMutantSequenceDetectorImpl;
-import org.magneto.mutantDetector.exceptions.InvalidDnaException;
+import org.magneto.mutantDetector.business.mutantDetector.impl.HorizontalSequenceDetectorImpl;
+import org.magneto.mutantDetector.business.mutantDetector.impl.InverseObliqueSequenceDetectorImpl;
+import org.magneto.mutantDetector.business.mutantDetector.impl.ObliqueSequenceDetectorImpl;
+import org.magneto.mutantDetector.business.mutantDetector.impl.VerticalSequenceDetectorImpl;
 import org.magneto.mutantDetector.utils.DnaInputTestCaseInput;
 
 import lombok.extern.log4j.Log4j;
@@ -26,37 +21,6 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class SequenceDetectorTest {
 
-	@Test
-	/**
-	 * TODO: Convertir en 3 test
-	 */
-	public void testIsValidDNA() {
-		DnaInputTestCaseInput humanDna = DnaInputTestCaseInput.getHumanDNA();
-		DnaInputTestCaseInput mutantDna = DnaInputTestCaseInput.getMutantDNA();
-		DnaInputTestCaseInput invalidDna = DnaInputTestCaseInput.getInvalidDNA();
-
-		DnaValidator dnaValidator = new DnaValidator();
-		String mensaje = "ADN VALIDO";
-		try {
-			Assertions.assertTrue(dnaValidator.validate(humanDna.getDna()), mensaje);
-			Assertions.assertTrue(dnaValidator.validate(mutantDna.getDna()), mensaje);
-		} catch (InvalidDnaException e) {
-			// TODO Auto-generated catch block
-			Assertions.fail(e);
-		}
-
-		// Refactorizar excepciones
-		Assertions.assertThrows(InvalidDnaException.class, new Executable() {
-
-			@Override
-			public void execute() throws Throwable {
-				dnaValidator.validate(invalidDna.getDna());
-
-			}
-		}, mensaje);
-
-	}
-
 	/**
 	 * ANALIZA CADENAS DE ADN VALIDAS EN BUSCA DE FALLAS EN LOS COMPONENTES DEL
 	 * DETECTOR DE ADN HORIZONTAL
@@ -65,7 +29,7 @@ public class SequenceDetectorTest {
 	 */
 	@Test
 	public void horizontalSequenceDetectorTest() throws Exception {
-		IMutantSequenceDetector horizontalMsd = new HorizontalMutantSequenceDetectorImpl(MutantDetector.MUTANT_SEQUENCE_LENGTH);
+		SequenceDetector horizontalMsd = new HorizontalSequenceDetectorImpl(MutantDetector.MUTANT_SEQUENCE_LENGTH);
 		DnaInputTestCaseInput dna = DnaInputTestCaseInput.getExhativeCaseMutantDNA();
 		String message = "HORIZONTALES";
 		genericMutantSequenceDetectorTest(horizontalMsd, message, dna.getHorizontalSequences(), dna.getDna());
@@ -79,7 +43,7 @@ public class SequenceDetectorTest {
 	 */
 	@Test
 	public void verticalSequenceDetectorTest() throws Exception {
-		IMutantSequenceDetector horizontalMsd = new VerticalMutantSequenceDetectorImpl(MutantDetector.MUTANT_SEQUENCE_LENGTH);
+		SequenceDetector horizontalMsd = new VerticalSequenceDetectorImpl(MutantDetector.MUTANT_SEQUENCE_LENGTH);
 		DnaInputTestCaseInput dna = DnaInputTestCaseInput.getExhativeCaseMutantDNA();
 		String message = "VERTICALES";
 		genericMutantSequenceDetectorTest(horizontalMsd, message, dna.getVerticalSequences(), dna.getDna());
@@ -93,7 +57,7 @@ public class SequenceDetectorTest {
 	 */
 	@Test
 	public void obliqueSequenceDetectorTest() throws Exception {
-		IMutantSequenceDetector oblicqueMsd = new ObliqueMutantSequenceDetectorImpl(MutantDetector.MUTANT_SEQUENCE_LENGTH);
+		SequenceDetector oblicqueMsd = new ObliqueSequenceDetectorImpl(MutantDetector.MUTANT_SEQUENCE_LENGTH);
 		DnaInputTestCaseInput dna = DnaInputTestCaseInput.getExhativeCaseMutantDNA();
 		String message = "OBLICUOS";
 		genericMutantSequenceDetectorTest(oblicqueMsd, message, dna.getObliqueSequences(), dna.getDna());
@@ -107,7 +71,7 @@ public class SequenceDetectorTest {
 	 */
 	@Test
 	public void inverseObliqueSequenceDetectorTest() throws Exception {
-		IMutantSequenceDetector oblicqueMsd = new InverseObliqueMutantSequenceDetectorImpl(MutantDetector.MUTANT_SEQUENCE_LENGTH);
+		SequenceDetector oblicqueMsd = new InverseObliqueSequenceDetectorImpl(MutantDetector.MUTANT_SEQUENCE_LENGTH);
 		DnaInputTestCaseInput dna = DnaInputTestCaseInput.getExhativeCaseMutantDNA();
 		String message = "OBLICUOS INVERSOS";
 		genericMutantSequenceDetectorTest(oblicqueMsd, message, dna.getInverseObliqueSequences(), dna.getDna());
@@ -121,7 +85,7 @@ public class SequenceDetectorTest {
 	 * que haya.
 	 * 
 	 */
-	private void genericMutantSequenceDetectorTest(IMutantSequenceDetector mutantSeqDetector, String tipoDetector, int expected, String[] dna) {
+	private void genericMutantSequenceDetectorTest(SequenceDetector mutantSeqDetector, String tipoDetector, int expected, String[] dna) {
 
 		try {
 			String message = "Detector de Cantidad de secuencias " + tipoDetector;

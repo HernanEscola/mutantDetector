@@ -1,10 +1,10 @@
 
-package org.magneto.mutantDetector.business.mutantSequenceDetector.impl;
+package org.magneto.mutantDetector.business.mutantDetector.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.magneto.mutantDetector.business.mutantSequenceDetector.IMutantSequenceDetector;
+import org.magneto.mutantDetector.business.mutantDetector.SequenceDetector;
 
 /**
  * Esta clase envuelve a los otros detectores y los combina para realizar el
@@ -13,9 +13,9 @@ import org.magneto.mutantDetector.business.mutantSequenceDetector.IMutantSequenc
  * @author hescola
  *
  */
-public class MultiSequenceDetectorImpl implements IMutantSequenceDetector {
+public class MultiDetectorImpl implements SequenceDetector {
 
-	private List<IMutantSequenceDetector> detectors = new ArrayList<IMutantSequenceDetector>();
+	private List<SequenceDetector> detectors = new ArrayList<SequenceDetector>();
 
 	
 
@@ -24,14 +24,14 @@ public class MultiSequenceDetectorImpl implements IMutantSequenceDetector {
 	 * 
 	 * @return
 	 */
-	public void addDetector(IMutantSequenceDetector detector) {
+	public void addDetector(SequenceDetector detector) {
 		detectors.add(detector);
 	}
 
 	@Override
 	public int detect(String[] dna, int maxNumberOfSequencesTryingToDetect) {
 		int found = 0;
-		for (IMutantSequenceDetector msd : this.detectors) {
+		for (SequenceDetector msd : this.detectors) {
 			found += msd.detect(dna, maxNumberOfSequencesTryingToDetect - found);
 			if (found >= maxNumberOfSequencesTryingToDetect) {
 				break;

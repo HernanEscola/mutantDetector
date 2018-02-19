@@ -16,17 +16,16 @@ import io.swagger.jaxrs.config.BeanConfig;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-@SwaggerDefinition(basePath="api",info = @Info(description = "API para la deteccion de genes Mutantes en humanos", version = "1.0.2", title = "Magneto - Mutant Detector ", contact = @Contact(name = "Hernan Adriel Escola", email = "hernan.a.escola@gmail.com")), consumes = {
-		"application/json" }, produces = { "application/json" }, schemes = { SwaggerDefinition.Scheme.HTTP}, externalDocs = @ExternalDocs(value = "Documentacion completa de la API ", url = "../javadocs/index.html"))
+@SwaggerDefinition(basePath = "api", info = @Info(description = "API para la deteccion de genes Mutantes en humanos", version = "1.0.2", title = "Magneto - Mutant Detector ", contact = @Contact(name = "Hernan Adriel Escola", email = "hernan.a.escola@gmail.com")), consumes = {
+		"application/json" }, produces = { "application/json" }, schemes = {
+				SwaggerDefinition.Scheme.HTTP }, externalDocs = @ExternalDocs(value = "Documentacion completa de la API ", url = "../javadocs/index.html"))
 @ApplicationPath("api")
 public class RestApplication extends ResourceConfig {
 	public static final String RESOURCE_PACKAGE = "org.magneto.mutantDetector";
 
 	public RestApplication(@Context ServletContext servletContext) {
-
 		initResourceConfig(this);
-
-		BeanConfig beanConfig = getConfig();
+		BeanConfig beanConfig = config();
 		/**
 		 * Deberñia levantar el contexto desde la configuracion de la app
 		 */
@@ -51,7 +50,7 @@ public class RestApplication extends ResourceConfig {
 		return rc;
 	}
 
-	public static BeanConfig getConfig() {
+	public static BeanConfig config() {
 
 		BeanConfig beanConfig = new BeanConfig();
 		beanConfig.setVersion("1.0.2");

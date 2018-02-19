@@ -1,4 +1,4 @@
-package org.magneto.mutantDetector.services.interfaces;
+package org.magneto.mutantDetector.services;
 
 import org.magneto.mutantDetector.DTO.Stats;
 import org.magneto.mutantDetector.exceptions.DBException;

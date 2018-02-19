@@ -33,7 +33,6 @@ public class JedisProducer {
 	 * @param jedis
 	 */
 	protected void initJedisPool() {
-		final JedisPoolConfig poolConfig;
 
 		JedisPoolConfig config = getJedisPoolConfig();
 
@@ -103,11 +102,8 @@ public class JedisProducer {
 		poolConfig.setTimeBetweenEvictionRunsMillis(Duration.ofSeconds(30).toMillis());
 		poolConfig.setNumTestsPerEvictionRun(3);
 		poolConfig.setBlockWhenExhausted(true);
-		JedisPoolConfig config = new JedisPoolConfig();
-		config.setTestOnBorrow(true);
-		config.setMaxWaitMillis(2000); // si en dos segundos no consigue una
-										// conexión algo anda mal
-		return config;
+		poolConfig.setMaxWaitMillis(2000);
+		return poolConfig;
 	}
 
 	public static JedisProducer getInstance() {

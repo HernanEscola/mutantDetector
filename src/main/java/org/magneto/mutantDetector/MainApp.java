@@ -4,9 +4,6 @@ import java.io.IOException;
 
 import org.magneto.mutantDetector.utils.ServersManager;
 
-import lombok.extern.log4j.Log4j;
-
-@Log4j
 /**
  * Inicia la aplicación sin necesidad de deployarla ni tener activo un server de
  * Redis

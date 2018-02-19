@@ -1,16 +1,16 @@
-package org.magneto.mutantDetector.services;
+package org.magneto.mutantDetector.services.impl;
 
 import javax.inject.Inject;
 
 import org.jvnet.hk2.annotations.Service;
 import org.magneto.mutantDetector.DTO.Dna;
 import org.magneto.mutantDetector.business.enums.EDnaType;
-import org.magneto.mutantDetector.business.mutantSequenceDetector.DnaValidator;
-import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantDetector;
+import org.magneto.mutantDetector.business.mutantDetector.MutantDetector;
+import org.magneto.mutantDetector.business.mutantDetector.validator.DnaValidator;
 import org.magneto.mutantDetector.database.MutantDao;
 import org.magneto.mutantDetector.exceptions.DBException;
 import org.magneto.mutantDetector.exceptions.InvalidDnaException;
-import org.magneto.mutantDetector.services.interfaces.MutantService;
+import org.magneto.mutantDetector.services.MutantService;
 
 import lombok.extern.log4j.Log4j;
 

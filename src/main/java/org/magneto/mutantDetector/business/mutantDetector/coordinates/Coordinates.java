@@ -1,4 +1,4 @@
-package org.magneto.mutantDetector.business.mutantSequenceDetector;
+package org.magneto.mutantDetector.business.mutantDetector.coordinates;
 
 public class Coordinates {
 	

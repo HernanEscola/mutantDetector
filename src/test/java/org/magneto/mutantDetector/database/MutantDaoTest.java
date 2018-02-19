@@ -4,14 +4,10 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.magneto.mutantDetector.database.MutantDao;
 import org.magneto.mutantDetector.exceptions.DBException;
 import org.magneto.mutantDetector.utils.DnaInputTestCaseInput;
 import org.magneto.mutantDetector.utils.TestWithNewRedisServerInstance;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class MutantDaoTest extends TestWithNewRedisServerInstance {
 
 	@BeforeAll

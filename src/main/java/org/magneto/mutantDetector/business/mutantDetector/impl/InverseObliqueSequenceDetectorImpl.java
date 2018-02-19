@@ -1,4 +1,4 @@
-package org.magneto.mutantDetector.business.mutantSequenceDetector.impl;
+package org.magneto.mutantDetector.business.mutantDetector.impl;
 
 /**
  * Detecta secuencias oblicuas de la longitud pasada en el contructor y corta la
@@ -9,11 +9,11 @@ package org.magneto.mutantDetector.business.mutantSequenceDetector.impl;
  * @author hescola
  *
  */
-public class InverseObliqueMutantSequenceDetectorImpl extends MultiSequenceDetectorImpl {
+public class InverseObliqueSequenceDetectorImpl extends MultiDetectorImpl {
 
-	public InverseObliqueMutantSequenceDetectorImpl(int sequenceLength) {
+	public InverseObliqueSequenceDetectorImpl(int sequenceLength) {
 		super();
-		addDetector(new InverseObliqueVerticalMutantSequenceDetectorImpl(sequenceLength));
+		addDetector(new InverseObliqueVerticalSequenceDetectorImpl(sequenceLength));
 		addDetector(new InverseObliqueHorizontalMutantSequenceDetectorImpl(sequenceLength));
 	}
 

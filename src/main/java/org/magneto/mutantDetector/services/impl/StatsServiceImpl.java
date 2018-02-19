@@ -1,4 +1,4 @@
-package org.magneto.mutantDetector.services;
+package org.magneto.mutantDetector.services.impl;
 
 import javax.inject.Inject;
 
@@ -6,12 +6,9 @@ import org.jvnet.hk2.annotations.Service;
 import org.magneto.mutantDetector.DTO.Stats;
 import org.magneto.mutantDetector.database.StatsDao;
 import org.magneto.mutantDetector.exceptions.DBException;
-import org.magneto.mutantDetector.services.interfaces.StatsService;
-
-import lombok.extern.log4j.Log4j;
+import org.magneto.mutantDetector.services.StatsService;
 
 @Service
-@Log4j
 public class StatsServiceImpl implements StatsService {
 
 	@Inject

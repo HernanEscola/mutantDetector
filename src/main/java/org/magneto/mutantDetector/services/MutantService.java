@@ -1,4 +1,4 @@
-package org.magneto.mutantDetector.services.interfaces;
+package org.magneto.mutantDetector.services;
 
 import org.magneto.mutantDetector.DTO.Dna;
 import org.magneto.mutantDetector.business.enums.EDnaType;

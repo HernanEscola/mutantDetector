@@ -3,7 +3,7 @@ package org.magneto.mutantDetector.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantDetector;
+import org.magneto.mutantDetector.business.mutantDetector.MutantDetector;
 
 /**
  * Estructura que contiene un dna input y sus respectivos resultados para luego

@@ -13,7 +13,7 @@ import org.magneto.mutantDetector.DTO.Dna;
 import org.magneto.mutantDetector.business.enums.EDnaType;
 import org.magneto.mutantDetector.exceptions.DBException;
 import org.magneto.mutantDetector.exceptions.InvalidDnaException;
-import org.magneto.mutantDetector.services.MutantServiceImpl;
+import org.magneto.mutantDetector.services.impl.MutantServiceImpl;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +48,6 @@ public class MutantResource {
 			if (type == EDnaType.MUTANT) {
 				return Response.ok("ADN Mutante").build();
 			} else {
-				
 				return Response.status(Status.FORBIDDEN).entity("ADN Humano").build();
 			}
 		} catch (InvalidDnaException e) {

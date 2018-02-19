@@ -13,7 +13,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.magneto.mutantDetector.MainApp;
 import org.magneto.mutantDetector.config.jersey.RestApplication;
 
-import io.swagger.jaxrs.config.BeanConfig;
 import lombok.extern.log4j.Log4j;
 import redis.clients.jedis.Jedis;
 import redis.embedded.RedisServer;
@@ -144,9 +143,7 @@ public class ServersManager {
 
 	public static ResourceConfig getResourceConfig() {
 		final ResourceConfig resourceConfig = new RestApplication(null);
-
-		BeanConfig beanConfig = RestApplication.getConfig();
-		//beanConfig.setBasePath(CONTEXT_PATH + "api/");
+		RestApplication.config();
 		return resourceConfig;
 
 	}

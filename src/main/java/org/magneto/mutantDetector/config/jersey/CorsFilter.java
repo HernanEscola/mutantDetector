@@ -7,10 +7,7 @@ import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.ext.Provider;
 
-import lombok.extern.log4j.Log4j;
-
 @Provider
-@Log4j
 public class CorsFilter implements ContainerResponseFilter {
 
     @Override

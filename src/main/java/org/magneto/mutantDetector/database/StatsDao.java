@@ -9,7 +9,6 @@ import org.magneto.mutantDetector.exceptions.DBException;
 
 import com.google.common.base.Optional;
 
-import lombok.extern.log4j.Log4j;
 import redis.clients.jedis.Jedis;
 
 /**
@@ -19,7 +18,6 @@ import redis.clients.jedis.Jedis;
  *
  */
 @Service
-@Log4j
 public class StatsDao extends JedisDao {
 
 	public final String DAO_KEY = "stats";

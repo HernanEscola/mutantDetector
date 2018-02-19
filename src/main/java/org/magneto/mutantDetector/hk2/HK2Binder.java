@@ -3,8 +3,8 @@ package org.magneto.mutantDetector.hk2;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.magneto.mutantDetector.database.MutantDao;
 import org.magneto.mutantDetector.database.StatsDao;
-import org.magneto.mutantDetector.services.MutantServiceImpl;
-import org.magneto.mutantDetector.services.StatsServiceImpl;
+import org.magneto.mutantDetector.services.impl.MutantServiceImpl;
+import org.magneto.mutantDetector.services.impl.StatsServiceImpl;
 
 public class HK2Binder extends AbstractBinder {
 

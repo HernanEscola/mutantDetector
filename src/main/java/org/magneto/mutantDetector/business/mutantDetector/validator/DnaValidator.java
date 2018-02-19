@@ -1,4 +1,4 @@
-package org.magneto.mutantDetector.business.mutantSequenceDetector;
+package org.magneto.mutantDetector.business.mutantDetector.validator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -57,8 +57,6 @@ public class DnaValidator {
 	private void validateMinLength(String[] dna) throws InvalidDnaException {
 		if (dna.length < SEQUENCE_LENGTH) {
 			throw new InvalidDnaException("El largo de la cadena de ADN debe ser de al menos " + SEQUENCE_LENGTH);
-			// throw new InvalidDnaException("DNA length must have at least a length of " +
-						// SEQUENCE_LENGTH );
 		}
 	}
 
@@ -68,7 +66,6 @@ public class DnaValidator {
 		for (int j = 0; j < size; j++) {
 			if (dna[j].length() != size) {
 				throw new InvalidDnaException("La Cadena de ADN debe representar una matriz N x N ");
-				// throw new InvalidDnaException("The DN " + SEQUENCE_LENGTH );
 			}
 		}
 	}

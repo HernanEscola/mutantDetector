@@ -1,11 +1,11 @@
-package org.magneto.mutantDetector.business.mutantSequenceDetector;
+package org.magneto.mutantDetector.business.mutantDetector;
 
 /**
  * API del Detector de secuencias mutante
  * @author Hernan A. Escola 
  *
  */
-public interface IMutantSequenceDetector {
+public interface SequenceDetector {
 
 	/**
 	 * Método que se ejecuta para buscar y contar secuencias hasta maxNumberOfSequencesTryingToDetect

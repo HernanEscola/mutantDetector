@@ -8,14 +8,12 @@ import javax.ws.rs.core.MediaType;
 
 import org.magneto.mutantDetector.DTO.Stats;
 import org.magneto.mutantDetector.exceptions.DBException;
-import org.magneto.mutantDetector.services.StatsServiceImpl;
+import org.magneto.mutantDetector.services.impl.StatsServiceImpl;
 
 import io.swagger.annotations.Api;
-import lombok.extern.log4j.Log4j;
 
 @Api(value = "Stats Service", description = "API De consulta de Stats sobre los analaísis realizado")
 @Path("/stats")
-@Log4j
 public class StatsResource {
 
 	@Inject
