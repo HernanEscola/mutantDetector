@@ -30,13 +30,13 @@ public class StatsServiceImpl implements StatsService {
 	}
 
 	@Override
-	public void incrementMutant() throws DBException {
+	public void incrementMutantCount() throws DBException {
 		statsDao.addMutant();
 		
 	}
 
 	@Override
-	public void incrementHuman() throws DBException {
+	public void incrementHumanCount() throws DBException {
 		// TODO Auto-generated method stub
 		statsDao.addHuman();
 	}

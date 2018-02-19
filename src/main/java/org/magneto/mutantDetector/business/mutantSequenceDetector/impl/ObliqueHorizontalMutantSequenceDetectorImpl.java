@@ -5,8 +5,8 @@ import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantSequence
 public class ObliqueHorizontalMutantSequenceDetectorImpl extends MutantSequenceDetectorBaseImpl {
 
 	
-	public ObliqueHorizontalMutantSequenceDetectorImpl(int sequenceLength, int numberOfSequencesToFind) {
-		super(sequenceLength, numberOfSequencesToFind);
+	public ObliqueHorizontalMutantSequenceDetectorImpl(int sequenceLength) {
+		super(sequenceLength);
 	}
 
 	@Override
@@ -17,7 +17,6 @@ public class ObliqueHorizontalMutantSequenceDetectorImpl extends MutantSequenceD
 
 	@Override
 	public int getRow(int r, int s) {
-		// TODO Auto-generated method stub
 		return s;
 	}
 	

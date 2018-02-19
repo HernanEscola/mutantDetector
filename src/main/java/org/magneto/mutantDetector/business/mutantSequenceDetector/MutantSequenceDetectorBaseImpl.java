@@ -5,17 +5,14 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceDetector {
 
-	protected int numberOfSequencesToFind;
+	protected int maxNumberOfSequencesTryingToDetect;
 	protected int size;
 	protected int sequenceLength;
 	protected String[] dna;
 
-	public MutantSequenceDetectorBaseImpl(int sequenceLength, int numberOfSequencesToFind) {
+	public MutantSequenceDetectorBaseImpl(int sequenceLength) {
 		super();
-		init(sequenceLength, numberOfSequencesToFind);
-	}
-
-	public MutantSequenceDetectorBaseImpl() {
+		this.sequenceLength = sequenceLength;
 	}
 
 	public int getSize() {
@@ -23,17 +20,7 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 	}
 
 	public int getNumberOfSequencesToFind() {
-		return numberOfSequencesToFind;
-	}
-
-	public int getSequenceLength() {
-		return sequenceLength;
-	}
-
-	public IMutantSequenceDetector init(int sequenceLength, int numberOfSequencesToFind) {
-		this.sequenceLength = sequenceLength;
-		this.numberOfSequencesToFind = numberOfSequencesToFind;
-		return this;
+		return maxNumberOfSequencesTryingToDetect;
 	}
 
 	/**
@@ -48,9 +35,9 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 	public abstract int getColumn(int r, int offset);
 
 	@Override
-	public int detect(String[] dna) {
-		// TODO Auto-generated method stub
-		size = dna.length;
+	public int detect(String[] dna, int maxNumberOfSequencesTryingToDetect) {
+		this.size = dna.length;
+		this.maxNumberOfSequencesTryingToDetect = maxNumberOfSequencesTryingToDetect;
 		return find(dna);
 	}
 
@@ -72,7 +59,7 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 		/**
 		 * Puedo acotar optimizarlo un poco más
 		 */
-		for (int r = 0; r < size && found < numberOfSequencesToFind; r++) {
+		for (int r = 0; r < size && found < maxNumberOfSequencesTryingToDetect; r++) {
 
 			charForSequence = ' ';
 			count = 0;
@@ -81,7 +68,7 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 			 */
 
 			// String word = "";
-			for (int offset = 0; offset < size && found < numberOfSequencesToFind; offset++) {
+			for (int offset = 0; offset < size && found < maxNumberOfSequencesTryingToDetect; offset++) {
 
 				row = getRow(r, offset);
 				column = getColumn(r, offset);
@@ -108,7 +95,7 @@ public abstract class MutantSequenceDetectorBaseImpl implements IMutantSequenceD
 
 							// log.info("found " + word + " in " + row+", "
 							// +column);
-							if (++found >= numberOfSequencesToFind) {
+							if (++found >= maxNumberOfSequencesTryingToDetect) {
 								return found;
 							}
 							charForSequence = ' ';

@@ -4,7 +4,10 @@ import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantSequence
 
 public class InverseObliqueVerticalMutantSequenceDetectorImpl extends MutantSequenceDetectorBaseImpl {
 
-	public InverseObliqueVerticalMutantSequenceDetectorImpl() {
+	
+
+	public InverseObliqueVerticalMutantSequenceDetectorImpl(int sequenceLength) {
+		super(sequenceLength);
 	}
 
 	@Override

@@ -2,24 +2,18 @@ package org.magneto.mutantDetector.business.mutantSequenceDetector;
 
 /**
  * API del Detector de secuencias mutante
- * @author aion
+ * @author Hernan A. Escola 
  *
  */
 public interface IMutantSequenceDetector {
 
 	/**
-	 * Método que se ejecuta para encontrar las secuencias
+	 * Método que se ejecuta para buscar y contar secuencias hasta maxNumberOfSequencesTryingToDetect
 	 * 
 	 * @param dna
+	 * @param maxNumberOfSequencesToTryDetect
 	 * @return
 	 */
-	public int detect(String[] dna);
+	public int detect(String[] dna, int maxNumberOfSequencesTryingToDetect);
 	
-	/**
-	 * Inicializa el detector para poder ajustarse a los parámetros
-	 * @param SEQUENCE_LENGTH
-	 * @param numberOfSequencesToFind
-	 */
-	public IMutantSequenceDetector init(int sequenceLength, int numberOfSequencesToFind);
-
 }

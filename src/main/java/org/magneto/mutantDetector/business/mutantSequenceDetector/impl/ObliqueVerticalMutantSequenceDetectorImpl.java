@@ -4,8 +4,8 @@ import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantSequence
 
 public class ObliqueVerticalMutantSequenceDetectorImpl extends MutantSequenceDetectorBaseImpl {
 
-	public ObliqueVerticalMutantSequenceDetectorImpl(int sequenceLength, int numberOfSequencesToFind) {
-		super(sequenceLength, numberOfSequencesToFind);
+	public ObliqueVerticalMutantSequenceDetectorImpl(int sequenceLength) {
+		super(sequenceLength);
 	}
 
 	@Override

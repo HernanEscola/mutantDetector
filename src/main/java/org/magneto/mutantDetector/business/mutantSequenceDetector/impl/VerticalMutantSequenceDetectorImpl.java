@@ -4,7 +4,8 @@ import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantSequence
 
 public class VerticalMutantSequenceDetectorImpl extends MutantSequenceDetectorBaseImpl {
 
-	public VerticalMutantSequenceDetectorImpl() {
+	public VerticalMutantSequenceDetectorImpl(int sequenceLength) {
+		super(sequenceLength);
 	}
 
 	@Override
@@ -20,6 +21,5 @@ public class VerticalMutantSequenceDetectorImpl extends MutantSequenceDetectorBa
 	public boolean isInsideMatrix(int row, int column) {
 		return row < size && column < size;
 	}
-
 
 }

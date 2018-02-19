@@ -21,12 +21,12 @@ public interface StatsService {
 	 * Aumenta en 1 el contador de ADN mutante analizados
 	 * @throws DBException 
 	 */
-	public void incrementMutant() throws DBException;
+	public void incrementMutantCount() throws DBException;
 	
 	/**
 	 * Aumenta en 1 el contador de ADN Humanos analizados
 	 * @throws DBException 
 	 */
-	public void incrementHuman() throws DBException;
+	public void incrementHumanCount() throws DBException;
 
 }

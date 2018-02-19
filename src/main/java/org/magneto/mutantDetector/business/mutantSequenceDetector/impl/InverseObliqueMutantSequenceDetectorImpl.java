@@ -9,14 +9,12 @@ package org.magneto.mutantDetector.business.mutantSequenceDetector.impl;
  * @author hescola
  *
  */
-public class InverseObliqueMutantSequenceDetectorImpl extends MultiMutantSequenceDetectorImpl {
-	
+public class InverseObliqueMutantSequenceDetectorImpl extends MultiSequenceDetectorImpl {
 
-	public  InverseObliqueMutantSequenceDetectorImpl() {
+	public InverseObliqueMutantSequenceDetectorImpl(int sequenceLength) {
 		super();
-		addDetector(new InverseObliqueVerticalMutantSequenceDetectorImpl());
-		addDetector(new InverseObliqueHorizontalMutantSequenceDetectorImpl());
+		addDetector(new InverseObliqueVerticalMutantSequenceDetectorImpl(sequenceLength));
+		addDetector(new InverseObliqueHorizontalMutantSequenceDetectorImpl(sequenceLength));
 	}
-
 
 }

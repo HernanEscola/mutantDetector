@@ -5,19 +5,18 @@ import org.magneto.mutantDetector.business.mutantSequenceDetector.MutantSequence
 public class HorizontalMutantSequenceDetectorImpl extends MutantSequenceDetectorBaseImpl {
 
 
-	public HorizontalMutantSequenceDetectorImpl() {
-		super();
+
+	public HorizontalMutantSequenceDetectorImpl(int sequenceLength) {
+		super(sequenceLength);
 	}
 
 	@Override
 	public int getColumn(int r, int s) {
-		// TODO Auto-generated method stub
 		return s;
 	}
 
 	@Override
 	public int getRow(int r, int s) {
-		// TODO Auto-generated method stub
 		return r;
 	}
 
