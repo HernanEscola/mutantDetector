@@ -111,11 +111,17 @@ public class SequenceDetectorTest {
 	}
 
 	@Test
+	@org.junit.Test
+	/**
+	 * imp ant: 3.349s x1M  matriz comun  de 6x6en Coni
+	 * 
+	 * 56.472s x1k matriz de 600x600
+	 */
 	public void isMutantSpeedTest() {
-		String[] dna = DnaInputTestCaseInput.getHumanDNA().getDna();
+		String[] dna = DnaInputTestCaseInput.getHumanDNAInvalidOnlyForSpeedTest(100).getDna();
 		MutantDetector mutantDetector = new MutantDetector();
 		Long start = System.currentTimeMillis();
-		int iterations = 1000000;
+		int iterations = 1000;
 		for (int i = 0; i < iterations; i++) {
 			mutantDetector.isMutant(dna);
 		}
