@@ -96,6 +96,38 @@ public class DnaInputTestCaseInput {
 	 * 
 	 * @return
 	 */
+	public static DnaInputTestCaseInput getHumanDNAInvalidOnlyForSpeedTest(int repeat) {
+		String[] finalDNA;
+		String[] dna = { //
+				"RTGCPQ", //
+				"FGHJKL", //
+				"MNBTCX", //
+				"HGFDSZ", //
+				"MBVCTA", //
+				"15AZTX",//
+		};
+		if (repeat <= 1) {
+			finalDNA = dna;
+		} else {
+			int size = dna.length * repeat;
+			finalDNA = new String[dna.length * repeat];
+			for (int i = 0; i < size; i++) {
+				StringBuilder line = new StringBuilder();
+				for (int j = 0; j < repeat; j++) {
+					line.append(dna[i%dna.length]);
+				}
+				finalDNA[i] = line.toString();
+			}
+		}
+		DnaInputTestCaseInput ret = new DnaInputTestCaseInput(finalDNA, 0, 0, 0, 0);
+		return ret;
+	}
+	
+	/**
+	 * Caso humano derivado del mutante
+	 * 
+	 * @return
+	 */
 	public static DnaInputTestCaseInput getHumanDNA() {
 		String[] dna = { //
 				"ATGCGA", //
@@ -105,7 +137,8 @@ public class DnaInputTestCaseInput {
 				"TCCCTA", //
 				"TCACTG",//
 		};
-		DnaInputTestCaseInput ret = new DnaInputTestCaseInput(dna, 0, 1, 0, 0);
+		
+		DnaInputTestCaseInput ret = new DnaInputTestCaseInput(dna, 0, 0, 0, 0);
 		return ret;
 	}
 
