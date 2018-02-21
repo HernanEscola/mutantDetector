@@ -121,7 +121,7 @@ public class SequenceDetectorTest {
 		String[] dna = DnaInputTestCaseInput.getHumanDNAInvalidOnlyForSpeedTest(100).getDna();
 		MutantDetector mutantDetector = new MutantDetector();
 		Long start = System.currentTimeMillis();
-		int iterations = 1000;
+		int iterations = 100;
 		for (int i = 0; i < iterations; i++) {
 			mutantDetector.isMutant(dna);
 		}
