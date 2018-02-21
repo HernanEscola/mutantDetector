@@ -20,10 +20,10 @@ public class MultiDetectorImpl implements SequenceDetector {
 	private int sequenceLength;
 	protected int matrixSize;
 	private String dna[];
+	
 
-
-	private List<AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl> detectors = new ArrayList<AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl>();
-
+	private ArrayList<AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl> detectors = new ArrayList<AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl>();
+	AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl[] detectoresArray;
 	/**
 	 * Implementar agregando los detectores que se desee
 	 * 
@@ -42,8 +42,9 @@ public class MultiDetectorImpl implements SequenceDetector {
 		this.matrixSize = dna.length;
 		this.maxNumberOfSequencesTryingToDetect = maxNumberOfSequencesTryingToDetect;
 		int found = 0;
+		detectoresArray = detectors.toArray(new AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl[detectors.size()]);
 
-		for (AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl detector : this.detectors) {
+		for (AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl detector : detectoresArray) {
 			detector.coordToCompareWithNextChar = null;
 			detector.count = 0;
 			detector.matrixSize = this.matrixSize;
@@ -67,9 +68,11 @@ public class MultiDetectorImpl implements SequenceDetector {
 	 */
 	private int searchForward(int sequenceIndexToSearchIn, int found) {
 		int characterIndex = -1;
-
+		AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl detector;
+		 int detectorIdx;
 		while (++characterIndex < matrixSize && found < maxNumberOfSequencesTryingToDetect) {
-			for (AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl detector : this.detectors) {
+			for (  detectorIdx = 0; detectorIdx< detectoresArray.length ; detectorIdx++) {
+				detector = detectoresArray[detectorIdx];
 				if (detector.coordToCompareWithNextChar == null) {
 					detector.coordToCompareWithNextChar = detector.transformToCoordinate(sequenceIndexToSearchIn, characterIndex);
 					detector.count = 1;
