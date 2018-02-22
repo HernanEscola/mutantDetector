@@ -86,14 +86,12 @@ public class SequenceDetectorTest {
 	 * 
 	 */
 	private void genericMutantSequenceDetectorTest(SequenceDetector mutantSeqDetector, String tipoDetector, int expected, String[] dna) {
-
 		try {
 			String message = "Detector de Cantidad de secuencias " + tipoDetector;
 			int[] maxNumbersOfSequence = { MutantDetector.N_SEQUENCES_TO_FIND, Integer.MAX_VALUE };
 			for (int maxNumberOfSequence : maxNumbersOfSequence) {
 				Assertions.assertEquals(Math.min(maxNumberOfSequence, expected), mutantSeqDetector.detect(dna, maxNumberOfSequence), message);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assertions.fail(e);
@@ -113,16 +111,20 @@ public class SequenceDetectorTest {
 	}
 
 	@Test
+	@org.junit.Test
+	/**
+	 * imp ant: 3.349s x1M  matriz comun  de 6x6en Coni
+	 * 
+	 * 56.472s x1k matriz de 600x600
+	 */
 	public void isMutantSpeedTest() {
-
-		String[] dna = DnaInputTestCaseInput.getHumanDNA().getDna();
+		String[] dna = DnaInputTestCaseInput.getHumanDNAInvalidOnlyForSpeedTest(100).getDna();
 		MutantDetector mutantDetector = new MutantDetector();
 		Long start = System.currentTimeMillis();
-		int iterations = 1000000;
+		int iterations = 100;
 		for (int i = 0; i < iterations; i++) {
 			mutantDetector.isMutant(dna);
 		}
-
 		Long finish = System.currentTimeMillis();
 		log.info("Finish Speed test in" + (finish - start) + "ms");
 	}

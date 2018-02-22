@@ -18,6 +18,11 @@ public class MultiDetectorImpl implements SequenceDetector {
 	private List<SequenceDetector> detectors = new ArrayList<SequenceDetector>();
 
 	
+	/**
+	 * Implementar agregando los detectores que se desee
+	 * 
+	 * @return
+	 */
 	public void addDetector(SequenceDetector detector) {
 		detectors.add(detector);
 	}
