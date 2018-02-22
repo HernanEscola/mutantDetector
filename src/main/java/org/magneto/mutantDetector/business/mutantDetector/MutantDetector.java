@@ -1,9 +1,11 @@
 package org.magneto.mutantDetector.business.mutantDetector;
 
 import org.magneto.mutantDetector.business.mutantDetector.impl.HorizontalSequenceDetectorImpl;
-import org.magneto.mutantDetector.business.mutantDetector.impl.InverseObliqueSequenceDetectorImpl;
+import org.magneto.mutantDetector.business.mutantDetector.impl.InverseObliqueHorizontalSequenceDetectorImpl;
+import org.magneto.mutantDetector.business.mutantDetector.impl.InverseObliqueVerticalSequenceDetectorImpl;
 import org.magneto.mutantDetector.business.mutantDetector.impl.MultiDetectorImpl;
-import org.magneto.mutantDetector.business.mutantDetector.impl.ObliqueSequenceDetectorImpl;
+import org.magneto.mutantDetector.business.mutantDetector.impl.ObliqueHorizontalSequenceDetectorImpl;
+import org.magneto.mutantDetector.business.mutantDetector.impl.ObliqueVerticalSequenceDetectorImpl;
 import org.magneto.mutantDetector.business.mutantDetector.impl.VerticalSequenceDetectorImpl;
 
 /**
@@ -24,8 +26,10 @@ public class MutantDetector extends MultiDetectorImpl {
 		multiSequenceDetectorImpl = new MultiDetectorImpl();
 		multiSequenceDetectorImpl.addDetector(new HorizontalSequenceDetectorImpl(MUTANT_SEQUENCE_LENGTH));
 		multiSequenceDetectorImpl.addDetector(new VerticalSequenceDetectorImpl(MUTANT_SEQUENCE_LENGTH));
-		multiSequenceDetectorImpl.addDetector(new ObliqueSequenceDetectorImpl(MUTANT_SEQUENCE_LENGTH));
-		multiSequenceDetectorImpl.addDetector(new InverseObliqueSequenceDetectorImpl(MUTANT_SEQUENCE_LENGTH));
+		multiSequenceDetectorImpl.addDetector(new ObliqueHorizontalSequenceDetectorImpl(MUTANT_SEQUENCE_LENGTH));
+		multiSequenceDetectorImpl.addDetector(new ObliqueVerticalSequenceDetectorImpl(MUTANT_SEQUENCE_LENGTH));
+		multiSequenceDetectorImpl.addDetector(new InverseObliqueHorizontalSequenceDetectorImpl(MUTANT_SEQUENCE_LENGTH));
+		multiSequenceDetectorImpl.addDetector(new InverseObliqueVerticalSequenceDetectorImpl(MUTANT_SEQUENCE_LENGTH));
 	}
 
 	public boolean isMutant(String[] dna) {

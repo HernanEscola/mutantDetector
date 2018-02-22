@@ -14,7 +14,7 @@ public class InverseObliqueSequenceDetectorImpl extends MultiDetectorImpl {
 	public InverseObliqueSequenceDetectorImpl(int sequenceLength) {
 		super();
 		addDetector(new InverseObliqueVerticalSequenceDetectorImpl(sequenceLength));
-		addDetector(new InverseObliqueHorizontalMutantSequenceDetectorImpl(sequenceLength));
+		addDetector(new InverseObliqueHorizontalSequenceDetectorImpl(sequenceLength));
 	}
 
 }

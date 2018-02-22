@@ -19,9 +19,13 @@ import redis.clients.jedis.JedisPoolConfig;
 public class JedisProducer {
 
 	public final static String REDIS_PORT = "6379";
-
 	private JedisPool jedisPool;
-	private static JedisProducer instance;
+	private final static JedisProducer instance = new JedisProducer();
+	
+	
+	public static JedisProducer getInstance() {
+		return instance;
+	}
 
 	protected JedisProducer() {
 		initJedisPool();
@@ -104,13 +108,6 @@ public class JedisProducer {
 		poolConfig.setBlockWhenExhausted(true);
 		poolConfig.setMaxWaitMillis(2000);
 		return poolConfig;
-	}
-
-	public static JedisProducer getInstance() {
-		if (instance == null) {
-			instance = new JedisProducer();
-		}
-		return instance;
 	}
 
 	public Jedis get() throws DBException {

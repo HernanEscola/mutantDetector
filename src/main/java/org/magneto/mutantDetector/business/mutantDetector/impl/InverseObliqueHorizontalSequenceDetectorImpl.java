@@ -2,9 +2,9 @@ package org.magneto.mutantDetector.business.mutantDetector.impl;
 
 import org.magneto.mutantDetector.business.mutantDetector.coordinates.Coordinates;
 
-public class InverseObliqueHorizontalMutantSequenceDetectorImpl extends AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl {
+public class InverseObliqueHorizontalSequenceDetectorImpl extends AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl {
 
-	public InverseObliqueHorizontalMutantSequenceDetectorImpl(int sequenceLength) {
+	public InverseObliqueHorizontalSequenceDetectorImpl(int sequenceLength) {
 		super(sequenceLength);
 	}
 

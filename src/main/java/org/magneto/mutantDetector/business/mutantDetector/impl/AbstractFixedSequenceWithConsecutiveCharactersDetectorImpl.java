@@ -71,9 +71,10 @@ public abstract class AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl
 				if (areTheSameCharacters(coordToCompareWithNextChar, coordsForNextChar)) {
 					count++;
 					if (count == sequenceLength) {
-						if (++found >= maxNumberOfSequencesTryingToDetect) {
-							return found;
-						}
+						++found;
+//						if (++found >= maxNumberOfSequencesTryingToDetect) {
+//							return found;
+//						}
 						coordToCompareWithNextChar = null;
 					}
 				} else {

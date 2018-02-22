@@ -7,7 +7,6 @@ import org.magneto.mutantDetector.database.jedis.JedisDao;
 public class JedisDaoTest {
 	@Test
 	public void getKeyTest() {
-		// TODO Auto-generated method stub
 		String key = "test";
 		JedisDao jedisDao = getJedisDaoTestImpl(key);
 		Assertions.assertEquals(jedisDao.getKey(key), key + "/" + key);
@@ -15,7 +14,6 @@ public class JedisDaoTest {
 
 	@Test
 	public void getDaoKeyTest() {
-		// TODO Auto-generated method stub
 		final String key = "test";
 		JedisDao jedisDao = getJedisDaoTestImpl(key);
 		Assertions.assertEquals(jedisDao.getDaoKey(), key);
@@ -25,7 +23,6 @@ public class JedisDaoTest {
 		return new JedisDao() {
 			@Override
 			public String getDaoKey() {
-				// TODO Auto-generated method stub
 				return key;
 			}
 		};
