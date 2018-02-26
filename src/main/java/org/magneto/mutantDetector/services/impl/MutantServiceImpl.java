@@ -1,6 +1,7 @@
 package org.magneto.mutantDetector.services.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.jvnet.hk2.annotations.Service;
 import org.magneto.mutantDetector.DTO.Dna;
@@ -16,14 +17,13 @@ import lombok.extern.log4j.Log4j;
 
 @Service
 @Log4j
+@Singleton
 public class MutantServiceImpl implements MutantService {
 
 	@Inject
 	private MutantDao dnaDao;
 	@Inject
 	private StatsServiceImpl statsService;
-
-	private MutantDetector mutantDetector = new MutantDetector();
 
 	public MutantServiceImpl() {
 		super();
@@ -41,8 +41,8 @@ public class MutantServiceImpl implements MutantService {
 		String[] dna = dnaData.getDna();
 		DnaValidator dnaValidator = new DnaValidator();
 		dnaValidator.validate(dna);
+		MutantDetector mutantDetector = new MutantDetector();
 		boolean isMutant = mutantDetector.isMutant(dna);
-
 		EDnaType type;
 		if (isMutant) {
 			type = EDnaType.MUTANT;

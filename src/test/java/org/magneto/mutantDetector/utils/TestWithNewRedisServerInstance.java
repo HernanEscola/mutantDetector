@@ -26,7 +26,6 @@ public class TestWithNewRedisServerInstance {
 		try {
 			redisServer = ServersManager.startCleanRedisInstance();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			Assertions.fail(e.getMessage());
 		}
 	}

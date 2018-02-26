@@ -1,10 +1,12 @@
 package org.magneto.mutantDetector.services;
 
+import org.jvnet.hk2.annotations.Contract;
 import org.magneto.mutantDetector.DTO.Dna;
 import org.magneto.mutantDetector.business.enums.EDnaType;
 import org.magneto.mutantDetector.exceptions.DBException;
 import org.magneto.mutantDetector.exceptions.InvalidDnaException;
 
+@Contract
 public interface MutantService {
 
 	/**

@@ -1,5 +1,7 @@
 package org.magneto.mutantDetector.database;
 
+import javax.inject.Singleton;
+
 import org.jvnet.hk2.annotations.Service;
 import org.magneto.mutantDetector.DTO.Stats;
 import org.magneto.mutantDetector.business.enums.EDnaType;
@@ -18,6 +20,7 @@ import redis.clients.jedis.Jedis;
  *
  */
 @Service
+@Singleton
 public class StatsDao extends JedisDao {
 
 	public final String DAO_KEY = "stats";

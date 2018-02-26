@@ -1,6 +1,7 @@
 package org.magneto.mutantDetector.services.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.jvnet.hk2.annotations.Service;
 import org.magneto.mutantDetector.DTO.Stats;
@@ -9,6 +10,7 @@ import org.magneto.mutantDetector.exceptions.DBException;
 import org.magneto.mutantDetector.services.StatsService;
 
 @Service
+@Singleton
 public class StatsServiceImpl implements StatsService {
 
 	@Inject

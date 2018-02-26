@@ -18,6 +18,7 @@ public class HK2Binder extends AbstractBinder {
 	@Override
 	protected void configure() {
 		//bind(MutantService.class).to(MutantServiceImpl.class);
+		 
 		bind(StatsServiceImpl.class).to(StatsServiceImpl.class);
 		bind(MutantServiceImpl.class).to(MutantServiceImpl.class);
 		bind(MutantDao.class).to(MutantDao.class);

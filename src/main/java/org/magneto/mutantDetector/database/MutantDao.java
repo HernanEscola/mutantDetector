@@ -1,5 +1,7 @@
 package org.magneto.mutantDetector.database;
 
+import javax.inject.Singleton;
+
 import org.jvnet.hk2.annotations.Service;
 import org.magneto.mutantDetector.database.jedis.JedisDao;
 import org.magneto.mutantDetector.database.jedis.JedisProducer;
@@ -10,9 +12,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import redis.clients.jedis.Jedis;
 
 @Service
+@Singleton
 public class MutantDao extends JedisDao {
 
 	public final String DAO_KEY = "mutatn";
+
 	@Override
 	public String getDaoKey() {
 		return DAO_KEY;
@@ -23,8 +27,6 @@ public class MutantDao extends JedisDao {
 
 	/**
 	 * Guarda en Redis la de ADN Mutante
-	 * 
-	 * 
 	 * 
 	 * @param dna
 	 * @return True si se trata de una nueva de ADN. False si ya se encontraba
