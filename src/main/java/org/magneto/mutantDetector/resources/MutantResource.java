@@ -13,7 +13,7 @@ import org.magneto.mutantDetector.DTO.Dna;
 import org.magneto.mutantDetector.business.enums.EDnaType;
 import org.magneto.mutantDetector.exceptions.DBException;
 import org.magneto.mutantDetector.exceptions.InvalidDnaException;
-import org.magneto.mutantDetector.services.impl.MutantServiceImpl;
+import org.magneto.mutantDetector.services.MutantService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +27,7 @@ import lombok.extern.log4j.Log4j;
 public class MutantResource {
 
 	@Inject
-	public MutantServiceImpl mutantService;
+	public MutantService mutantService;
 
 	/**
 	 * @param dna DNA Analizar

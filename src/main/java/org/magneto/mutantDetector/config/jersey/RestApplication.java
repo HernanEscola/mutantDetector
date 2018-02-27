@@ -33,7 +33,7 @@ public class RestApplication extends ResourceConfig {
 		if (servletContext != null) {
 			basePath += servletContext.getContextPath();
 		} else {
-			log.error("No hay contexto para extraer el path de configuración de swagger");
+			log.info("No hay contexto para extraer el path de configuración de swagger");
 		}
 		basePath += "/api/";
 		log.info("Se registró el basePath de swagger con el siguiente valor: " + basePath);

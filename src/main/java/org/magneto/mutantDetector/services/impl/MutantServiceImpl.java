@@ -12,6 +12,7 @@ import org.magneto.mutantDetector.database.MutantDao;
 import org.magneto.mutantDetector.exceptions.DBException;
 import org.magneto.mutantDetector.exceptions.InvalidDnaException;
 import org.magneto.mutantDetector.services.MutantService;
+import org.magneto.mutantDetector.services.StatsService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -23,7 +24,7 @@ public class MutantServiceImpl implements MutantService {
 	@Inject
 	private MutantDao dnaDao;
 	@Inject
-	private StatsServiceImpl statsService;
+	private StatsService statsService;
 
 	public MutantServiceImpl() {
 		super();

@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.magneto.mutantDetector.DTO.Stats;
 import org.magneto.mutantDetector.exceptions.DBException;
-import org.magneto.mutantDetector.services.impl.StatsServiceImpl;
+import org.magneto.mutantDetector.services.StatsService;
 
 import io.swagger.annotations.Api;
 
@@ -17,7 +17,7 @@ import io.swagger.annotations.Api;
 public class StatsResource {
 
 	@Inject
-	public StatsServiceImpl statsService;
+	public StatsService statsService;
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
