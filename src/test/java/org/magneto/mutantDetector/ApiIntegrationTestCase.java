@@ -13,7 +13,6 @@ import javax.ws.rs.core.Response.Status;
 
 import org.glassfish.jersey.client.JerseyClientBuilder;
 import org.glassfish.jersey.jackson.JacksonFeature;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneto.mutantDetector.DTO.Dna;
@@ -56,7 +55,7 @@ public class ApiIntegrationTestCase {
 			ServersManager.shutdownRedisServer();
 		} catch (Exception e) {
 			log.error("Error inesperado ");
-			Assert.fail("Ocurrio un error inesperado. Ver exception:" + e.getMessage());
+			Assertions.fail(e);
 		}
 	}
 

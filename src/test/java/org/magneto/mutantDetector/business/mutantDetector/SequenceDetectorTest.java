@@ -3,6 +3,7 @@ package org.magneto.mutantDetector.business.mutantDetector;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.magneto.mutantDetector.business.mutantDetector.impl.HorizontalRegexSequenceDetectorImpl;
 import org.magneto.mutantDetector.business.mutantDetector.impl.HorizontalSequenceDetectorImpl;
 import org.magneto.mutantDetector.business.mutantDetector.impl.InverseObliqueSequenceDetectorImpl;
 import org.magneto.mutantDetector.business.mutantDetector.impl.ObliqueSequenceDetectorImpl;
@@ -30,6 +31,14 @@ public class SequenceDetectorTest {
 	@Test
 	public void horizontalSequenceDetectorTest() throws Exception {
 		SequenceDetector horizontalMsd = new HorizontalSequenceDetectorImpl(MutantDetector.MUTANT_SEQUENCE_LENGTH);
+		DnaInputTestCaseInput dna = DnaInputTestCaseInput.getExhativeCaseMutantDNA();
+		String message = "HORIZONTALES";
+		genericMutantSequenceDetectorTest(horizontalMsd, message, dna.getHorizontalSequences(), dna.getDna());
+	}
+	
+	@Test
+	public void horizontalRegexSequenceDetectorTest() throws Exception {
+		SequenceDetector horizontalMsd = new HorizontalRegexSequenceDetectorImpl(MutantDetector.MUTANT_SEQUENCE_LENGTH);
 		DnaInputTestCaseInput dna = DnaInputTestCaseInput.getExhativeCaseMutantDNA();
 		String message = "HORIZONTALES";
 		genericMutantSequenceDetectorTest(horizontalMsd, message, dna.getHorizontalSequences(), dna.getDna());
@@ -119,9 +128,10 @@ public class SequenceDetectorTest {
 	 */
 	public void isMutantSpeedTest() {
 		String[] dna = DnaInputTestCaseInput.getHumanDNAInvalidOnlyForSpeedTest(100).getDna();
-		MutantDetector mutantDetector = new MutantDetector();
+	
 		Long start = System.currentTimeMillis();
 		int iterations = 100;
+		MutantDetector mutantDetector = new MutantDetector();
 		for (int i = 0; i < iterations; i++) {
 			mutantDetector.isMutant(dna);
 		}

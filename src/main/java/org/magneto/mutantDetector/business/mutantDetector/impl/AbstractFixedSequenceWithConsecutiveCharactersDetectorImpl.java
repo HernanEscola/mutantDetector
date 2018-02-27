@@ -5,15 +5,16 @@ import org.magneto.mutantDetector.business.mutantDetector.coordinates.Coordinate
 
 public abstract class AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl implements SequenceDetector {
 
-	private int maxNumberOfSequencesTryingToDetect;
+	protected int maxNumberOfSequencesTryingToDetect;
 	private int sequenceLength;
 	protected int matrixSize;
-	private String dna[];
+	protected String dna[];
 
 	public AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl(int sequenceLength) {
 		super();
 		this.sequenceLength = sequenceLength;
 	}
+	
 
 	/**
 	 * La parte complicada del algoritmo es la implementacion de este metodo. Debe
@@ -51,7 +52,7 @@ public abstract class AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl
 	 * @param sequenceIndexToSearchIn
 	 * @return
 	 */
-	private int searchForward(int sequenceIndexToSearchIn, int found) {
+	protected int searchForward(int sequenceIndexToSearchIn, int found) {
 		int characterIndex = -1;
 		int count = 0;
 		Coordinates coordToCompareWithNextChar = null;
@@ -72,9 +73,6 @@ public abstract class AbstractFixedSequenceWithConsecutiveCharactersDetectorImpl
 					count++;
 					if (count == sequenceLength) {
 						++found;
-//						if (++found >= maxNumberOfSequencesTryingToDetect) {
-//							return found;
-//						}
 						coordToCompareWithNextChar = null;
 					}
 				} else {
