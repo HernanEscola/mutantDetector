@@ -17,16 +17,15 @@ String[] dna = {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"};
 * Java 8
 * Maven - Administración y distribución del proyecto
 * Jersey - Api Restful
-* H2k - Injección de dependencias
-* Grizzly y Embeded Redis - Test de integración y  generación de standalone app. Cuenta con un Server bmbebido de Redis que sólo se ejecuta en memoria.
+* HK2 - Inyección de dependencias
+* Grizzly - WebServer para test de integración y generación de standalone app. 
+* Embeded Redis Server - Cuenta con un Server de Redis embebido para testear la aplicación.
 * Swagger - Generación de documentación de la API. Swagger-UI disponible para visualizar las especificaciones de la API
-* Junit - Test
+* JUnit5 - Test
 * Jacoco - Reporte de cobertura de tests
 * Jedis - Cliente Redis
-* Redis - Base de Datos
-* Tomcat 8 - WebServer
-* Amazon EC2 y ElasticCache - Alojamiento de la API
-* IDE - Eclipse
+* Amazon EC2 y ElasticCache - Host de la API en Tomcat 8 y Redis para base de datos
+* IDE Utilizada - Eclipse
 
 
 #Demo de la API
