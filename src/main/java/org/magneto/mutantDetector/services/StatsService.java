@@ -1,5 +1,6 @@
 package org.magneto.mutantDetector.services;
 
+import org.jvnet.hk2.annotations.Contract;
 import org.magneto.mutantDetector.DTO.Stats;
 import org.magneto.mutantDetector.exceptions.DBException;
 
@@ -9,6 +10,7 @@ import org.magneto.mutantDetector.exceptions.DBException;
  * @author hescola
  *
  */
+@Contract
 public interface StatsService {
 
 	/**

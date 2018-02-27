@@ -56,7 +56,7 @@ public class RestApplication extends ResourceConfig {
 		beanConfig.setVersion("1.0.2");
 		beanConfig.setSchemes(new String[] { "http" });
 		beanConfig.setHost("");
-		beanConfig.setResourcePackage(RESOURCE_PACKAGE);
+		beanConfig.setResourcePackage(RESOURCE_PACKAGE+".resources");
 		beanConfig.setScan(true);
 		return beanConfig;
 

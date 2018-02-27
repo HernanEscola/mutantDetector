@@ -12,9 +12,12 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.magneto.mutantDetector.MainApp;
 import org.magneto.mutantDetector.config.jersey.RestApplication;
+import org.magneto.mutantDetector.database.jedis.JedisProducer;
 
 import lombok.extern.log4j.Log4j;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.embedded.RedisExecProvider;
 import redis.embedded.RedisServer;
 
 @Log4j
@@ -30,8 +33,10 @@ public class ServersManager {
 	public static RedisServer redisServer;
 	public static HttpServer httpServer;
 
-	public final static String CONTEXT_PATH = "";// "/magnetoCorp";
-	public final static String BASE = "http://0.0.0.0:8082" + CONTEXT_PATH;
+	public final static String CONTEXT_PATH = "";
+	public final static String HTTP_SERVER_PORT = "8082";
+	public final static String MAX_HEAP_REDIS_SERVER_MEMORY = "64M"; //I.E: 128M
+	public final static String BASE = "http://0.0.0.0:"+ HTTP_SERVER_PORT + CONTEXT_PATH;
 	public final static URI ADDRESS = UriBuilder.fromPath(BASE + "/api").build();
 
 	/**
@@ -44,7 +49,7 @@ public class ServersManager {
 		try {
 
 			if (redisServer == null) {
-				redisServer = new RedisServer();
+				redisServer = instantiateRedisServer();
 
 			} else {
 				redisServer.stop();
@@ -58,6 +63,18 @@ public class ServersManager {
 			redisServer = new RedisServer();
 			redisServer.start();
 		}
+		return redisServer;
+	}
+
+	private static RedisServer instantiateRedisServer() {
+		RedisServer redisServer = RedisServer.builder()
+				  .redisExecProvider( RedisExecProvider.defaultProvider())
+				  .port(new Integer(JedisProducer.REDIS_PORT))
+				  .setting("maxheap "+MAX_HEAP_REDIS_SERVER_MEMORY)
+//				  .setting("loglevel verbose")
+//				  .setting("logfile \"stdout\"")
+				  .setting("persistence-available NO")
+				  .build();
 		return redisServer;
 	}
 
